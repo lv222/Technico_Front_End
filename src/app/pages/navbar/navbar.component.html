@@ -1,13 +1,13 @@
-<!-- <main class="application">
-	
+<main class="application">
+	<!-- this is our nav -->
 	<div class="nav">
 		<h1>Technico</h1>
 
 		<div *ngIf="isTokenPresent">
-			
+			<!-- <div> -->
 			<a routerLink="/" class="nav-link">Home</a>
 			<a routerLink="/property" class="nav-link">Property</a>
-			<a routerLink="/property-owner-details" class="nav-link">Property owner details</a>
+			<!-- <a routerLink="/property-owner-details" class="nav-link">Property owner details</a> -->
 			<a routerLink="/property-owner-homepage" class="nav-link">Property owner
 				homepage</a>
 			<a routerLink="/property-owner-and-properties" class="nav-link">Property
@@ -17,18 +17,4 @@
 
 			<button (click)="logout()">Logout</button>
 		</div>
-	</div> -->
-
-	<!-- what is rendered here is based on the router.
-		so if the user is on page /page1 then the component
-		from /src/app/page1 is rendered. If the user is on page
-		/page2 then /src/app/page2.
-
-		You can see the router configuration at
-		src/app/app.routes.ts
-	
-	-->
-        <!-- <app-navbar></app-navbar> -->
-	
-		<router-outlet />
-	
+	</div>
