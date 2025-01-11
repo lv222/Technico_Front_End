@@ -17,7 +17,7 @@ import { AuthService } from '../../services/auth/auth.service';
 export class LoginComponent {
 	
 	loginForm: FormGroup;
-  loginFailed = false;
+  	loginFailed = false;
 
   constructor(
     private http: HttpClient,
