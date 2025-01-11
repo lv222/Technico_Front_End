@@ -1,9 +1,10 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router, RouterOutlet } from '@angular/router';
 import { AdminHomeComponent } from "./pages/admin-home/admin-home.component";
 import { LoginComponent } from "./pages/login/login.component";
 import { NgIf } from '@angular/common';
 import { NavbarComponent } from "./pages/navbar/navbar.component";
+import { AuthService } from './services/auth/auth.service';
 
 @Component({
   selector: 'app-root',
@@ -12,22 +13,29 @@ import { NavbarComponent } from "./pages/navbar/navbar.component";
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
-export class AppComponent {
+export class AppComponent implements OnInit{
   title = 'Technico';
-  isTokenPresent: boolean = false;
 
-	constructor(private router: Router) {
-		const isTokenPresent = !!localStorage.getItem('token'); // Example check for token presence
-		this.isTokenPresent = isTokenPresent;
 
-		if (!isTokenPresent) {
-			this.router.navigate(['/login']);
-		}
-	}
+	constructor(private router: Router, private authService: AuthService ) {}
+		
 
-	// logout() {
-	// 	localStorage.removeItem('token');
-	// 	this.isTokenPresent = false;
-	// 	this.router.navigate(['/login']);
+		ngOnInit(): void {
+			
+		
+	// 	if (this.authService.isTokenPresent()) {
+	// 		const userType = this.authService.getUserType(); // Get userType from token
+	  
+	// 		// Redirect based on the userType
+	// 		if (userType === 'Admin') {
+	// 		  this.router.navigate(['/admin-home']);
+	// 		} else if (userType === 'User') {
+	// 		  this.router.navigate(['/user-home']);
+	// 		}
+	// 	  } else {
+	// 		// If no token is present, redirect to login
+	// 		this.router.navigate(['/login']);
 	// }
-}
+
+	
+}}

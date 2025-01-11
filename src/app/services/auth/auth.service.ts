@@ -1,7 +1,9 @@
 import { inject, Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { map, tap } from 'rxjs';
+import {jwtDecode} from 'jwt-decode';
+
 
 @Injectable({
   providedIn: 'root',
@@ -10,42 +12,47 @@ import { map, tap } from 'rxjs';
 
 export class AuthService {
   router: any;
-  
+  // isTokenPresent: boolean = false;
   constructor(private httpClient: HttpClient) { }
   
-  email = '';
-	password = '';
-	loginFailed = false;
+ 
   URL = 'https://localhost:7108/api';
   
   signup(data: any) {
     return this.httpClient.post(`${this.URL}/PropertyOwners`, data);
    
   }
-//   login(data: any) {
-//     return this.httpClient.post(`${this.URL}/login`, data)
-//       .pipe(map((data: any) => {
-//         // localStorage.setItem('token', JSON.stringify(result));
-//         localStorage.setItem('token', data.token);
-// 				if(data.userType == "Admin")
-// 				this.router.navigate(['admin-home']).then(() => {
-// 					window.location.reload();
-// 				});
-// 				if(data.userType == "User")
-// 					this.router.navigate(['user-home']).then(() => {
-// 						window.location.reload();
-// 					});
-//       }));
-//   }
+  	
 	
-
- 
-// isTokenPresent() {
-//   return localStorage.getItem('token') !== null;
-// }
-  
-   
-  
+  login(loginData: any) {
+    return this.httpClient.post('https://localhost:7108/api/PropertyOwners/login', loginData, {
+        headers: new HttpHeaders({
+            'Content-Type': 'application/json',
+        }),
+    });
+}
+isTokenPresent(): boolean {
+  const token = localStorage.getItem('token');
+  return token ? true : false;
 }
 
+// Method to decode the token and retrieve the user type (admin, user, etc.)
+getUserType(): string {
+  const token = localStorage.getItem('token'); // Retrieve the JWT from localStorage
+
+  if (token) {
+    try {
+      const decodedToken: any = jwtDecode(token); // Decode the token
+
+      // Assuming 'userType' is a property in the payload
+      return decodedToken?.userType || 'User'; // Default to 'User' if no userType exists
+    } catch (error) {
+      console.error('Error decoding JWT:', error);
+      return 'User'; // Fallback in case decoding fails
+    }
+  }
+
+  return 'User'; // If no token, default to 'User'
+}
+}
 

@@ -15,53 +15,50 @@ import { AuthService } from '../../services/auth/auth.service';
   styleUrl: './login.component.scss'
 })
 export class LoginComponent {
-	email = '';
-	password = '';
-	loginFailed = false;
-	constructor(private http: HttpClient, private router: Router, private authService: AuthService, private fb: FormBuilder) { }
+	
+	loginForm: FormGroup;
+  loginFailed = false;
 
-	// loginForm = new FormGroup({
-	// 	email: new FormControl('', [Validators.required, Validators.email]),
-	// 	password: new FormControl('', [Validators.required])
-	//   })
+  constructor(
+    private http: HttpClient,
+    private router: Router,
+    private authService: AuthService,
+    private fb: FormBuilder
+  ) {
+    this.loginForm = this.fb.group({
+      email: [''],
+      password: [''],
+    });
+  }
 
-	//   onSubmit(){
-	// 	if(this.loginForm.valid){
-	// 	  console.log(this.loginForm.value);
-	// 	  this.authService.login(this.loginForm.value)
-	// 	  .subscribe((data: any) => {
-	// 		if(this.authService.isTokenPresent()){
-	// 		  this.router.navigate(['/admin-home']);
-	// 		}
-	// 		console.log(data);
-	// 	  });
-	// 	}
-	//   }
-	login() {
-		const loginData = {
-			email: this.email,
-			password: this.password
-		};
+  public onSubmit() {
+    const loginData = this.loginForm.value;
+	
+    this.authService.login(loginData).subscribe({
+      next: (res: any) => {
+        localStorage.setItem('token', res.token);
+		
+		
+		console.log(res.userType);
+		console.log(res.token);
+		// console.log(localStorage.getItem('user_data'));
 
-		this.http.post('https://localhost:7108/api/PropertyOwners/login', loginData).subscribe({
-			next: (res: any) => {
-				
-				localStorage.setItem('token', res.token);
-				if(res.userType == "Admin")
-				this.router.navigate(['admin-home']).then(() => {
-					window.location.reload();
-				});
-				if(res.userType == "User")
-					this.router.navigate(['user-home']).then(() => {
-						window.location.reload();
-					});
-				
-			},
-			error: (err) => {
-				this.loginFailed = true;
-				console.error('Login failed', err);
-			}
-		});
-	}
+
+        if (res.userType === 'Admin') {
+          this.router.navigate(['admin-home']).then(() => {
+            window.location.reload();
+          });
+        } else if (res.userType === 'User') {
+          this.router.navigate(['user-home']).then(() => {
+            window.location.reload();
+          });
+        }
+      },
+      error: (err) => {
+        this.loginFailed = true;
+        console.error('Login failed', err);
+      },
+    });
+  }
 }
-
+	

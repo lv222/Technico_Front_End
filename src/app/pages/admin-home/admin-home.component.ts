@@ -24,6 +24,7 @@ export class AdminHomeComponent implements OnInit {
     this.getUsers();
     
   }
+
   private getUsers() {
     this.service.getUsers().subscribe((response: any) => {
       if (response && response.elements) {
@@ -34,9 +35,6 @@ export class AdminHomeComponent implements OnInit {
       console.log(this.propertyowner);
     });
   }
-      
-      
-   
 
   }
 

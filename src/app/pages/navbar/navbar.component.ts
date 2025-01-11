@@ -14,7 +14,7 @@ title = 'TechnicoFront';
   isTokenPresent: boolean = false;
 
   constructor(private router: Router) {
-    const isTokenPresent = !!localStorage.getItem('token'); // Example check for token presence
+    const isTokenPresent = !!localStorage.getItem('token'); 
     this.isTokenPresent = isTokenPresent;
 
     if (!isTokenPresent) {
