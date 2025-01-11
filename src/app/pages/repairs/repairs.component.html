@@ -1,1 +1,72 @@
-<p>repairs works!</p>
+
+<app-navbar></app-navbar>
+
+
+
+<div class="container">
+    <div class="title-button-container">
+      <!-- <h1 class="display-4">Welcome Admin</h1>
+      <hr class="my-4"> -->
+      <h2 class="title"> Pending repairs</h2>
+
+      <div class="button"><button>Create Repair</button>
+      <button>Search Repair</button></div>
+      
+
+    </div>
+    <div class="row">
+      <div class="col-md-4">
+        <table class="table">
+          <thead>
+            <tr>
+              <!-- <th>Index</th> -->
+              <th>Id</th>
+              <th>Type</th>
+              <th>Description</th>
+              <th>Status</th>
+              <th>Cost</th>
+              <th>Owner Name</th>
+              <th>Owner Vat</th>
+              <th>Property Id</th>
+              <th>Property Address</th>
+              <th>Property Type</th>
+            </tr>
+          </thead>
+          <tbody>
+            <ng-container *ngIf="propertyrepairs && propertyrepairs.length ">
+              <ng-container *ngFor="let repair of propertyrepairs">
+                <tr >
+                  <th scope="row">1</th>
+                  <td>{{repair.vat}} </td>
+                  <td>{{repair.typeOfRepair}} </td>
+                  <td>{{repair.description}} </td>
+                  <td>{{repair.status}} </td>
+                  <td>{{repair.cost}} </td>
+                  <td>{{repair.propertyItemId}} </td>
+                  <!-- <td>{{repair.propertyOwner.vatNumber}} </td>
+                  <td>{{repair.property.propertyId}} </td>
+                  <td>{{repair.property.propertyAddress}} </td>
+                  <td>{{repair.property.propertyType}} </td> -->
+                  
+                </tr>
+              </ng-container>
+            </ng-container>
+            
+          </tbody>
+        </table>
+        <p *ngIf="!propertyrepairs || propertyrepairs.length === 0">No property repairs pending.</p>
+      </div>
+    </div>
+    
+  </div>
+
+  <!-- vat: string,
+    propertyItemId: string,
+    id: string,
+    repairDate: string,
+    // typeOfRepair: Painting,
+    description: string,
+    address: string,
+    status: string,
+    // status: Pending,
+    cost: number; -->

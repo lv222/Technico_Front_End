@@ -3,9 +3,10 @@ export interface Repair {
     propertyItemId: string,
     id: string,
     repairDate: string,
-    // typeOfRepair: Painting,
+    typeOfRepair: string,
     description: string,
     address: string,
-    // status: Pending,
+    status: string,
+    
     cost: number;
   }

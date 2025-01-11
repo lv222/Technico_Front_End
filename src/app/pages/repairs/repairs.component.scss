@@ -1,0 +1,117 @@
+h2{
+    margin-left: 10px;
+    color: #07910e;
+}
+
+.container {
+    margin: 40px 10px;
+    padding: 10px;
+    max-width: 100%;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  .title-button-container{
+    display:flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    
+  }
+
+
+  
+  button{
+    padding: 8px 8px;
+    margin: 10px 10px;
+    border: none;
+    border-radius: 4px;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    text-decoration: none;
+    color: black;
+    background-color: rgb(235, 220, 8);
+  }
+
+  /* General table styling */
+.table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    font-size: 16px;
+    text-align: left;
+  }
+  
+  /* Table header styling */
+  .table thead th {
+    background-color: #f4f4f4;
+    color: #333;
+    font-weight: bold;
+    padding: 12px;
+    border-bottom: 2px solid #ddd;
+  }
+  
+  /* Table body row styling */
+  .table tbody tr {
+    border-bottom: 1px solid #ddd;
+  }
+  
+  /* Alternating row colors */
+  .table tbody tr:nth-child(even) {
+    background-color: #f9f9f9;
+  }
+  
+  /* Hover effect for rows */
+  .table tbody tr:hover {
+    background-color: #f1f1f1;
+  }
+  
+  /* Table cell styling */
+  .table tbody td, .table tbody th {
+    padding: 12px;
+  }
+  
+  /* Highlight for pending status */
+  .table tbody td:nth-child(5) {
+    font-weight: bold;
+    color: #e67e22; /* Orange color for pending status */
+  }
+
+  p{
+    margin-left:10px;
+  }
+  
+  /* Responsive design */
+  @media (max-width: 768px) {
+    .table {
+      font-size: 14px;
+    }
+    .table thead {
+      display: none; /* Hide header for mobile */
+    }
+    .table tbody tr {
+      display: block;
+      margin-bottom: 15px;
+    }
+    .table tbody td {
+      display: block;
+      text-align: right;
+      position: relative;
+      padding-left: 50%;
+    }
+    .table tbody td:before {
+      content: attr(data-label);
+      position: absolute;
+      left: 0;
+      width: 45%;
+      padding-left: 15px;
+      font-weight: bold;
+      text-align: left;
+    }
+
+   }
+  
