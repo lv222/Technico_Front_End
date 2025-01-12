@@ -1,35 +1,38 @@
 
 <app-navbar></app-navbar>
 
-
-
-<div class="container">
-    <div class="title-button-container">
+  <div class="title-button-container">
       <!-- <h1 class="display-4">Welcome Admin</h1>
       <hr class="my-4"> -->
-      <h2 class="title"> Pending repairs</h2>
-
-      <div class="button"><button>Create Repair</button>
-      <button>Search Repair</button></div>
+      <div>
+        <h2 class="title"> Pending repairs</h2>
+      </div>
       
 
-    </div>
+      <div class="button-container"><button>Create Repair</button>
+      <button>Search Repair</button></div>
+      </div>
+
+<div class="container">
+  
     <div class="row">
-      <div class="col-md-4">
+      
         <table class="table">
           <thead>
             <tr>
               <!-- <th>Index</th> -->
               <th>Id</th>
+              <th>Owner Vat</th>
               <th>Type</th>
               <th>Description</th>
               <th>Status</th>
               <th>Cost</th>
-              <th>Owner Name</th>
-              <th>Owner Vat</th>
               <th>Property Id</th>
+              <th>Date</th>
+              <!-- <th>Owner Name</th>
+              
               <th>Property Address</th>
-              <th>Property Type</th>
+              <th>Property Type</th> -->
             </tr>
           </thead>
           <tbody>
@@ -43,6 +46,7 @@
                   <td>{{repair.status}} </td>
                   <td>{{repair.cost}} </td>
                   <td>{{repair.propertyItemId}} </td>
+                  <td>{{ userFriendlyDate(repair.repairDate)}} </td>
                   <!-- <td>{{repair.propertyOwner.vatNumber}} </td>
                   <td>{{repair.property.propertyId}} </td>
                   <td>{{repair.property.propertyAddress}} </td>
@@ -58,7 +62,7 @@
       </div>
     </div>
     
-  </div>
+  
 
   <!-- vat: string,
     propertyItemId: string,

@@ -1,9 +1,29 @@
+body {
+  margin: 0;
+  
+  width: 100%;
+ max-width: 100%;
+padding: 0;
+  font-family: Arial, sans-serif;
+  background-color: #f5f5f5;
+  color: #333;
+  overflow-x: hidden;
+}
+
 h2{
-    margin-left: 10px;
-    color: #07910e;
+  // margin: auto;
+  color: #07910e;
 }
 
 .container {
+    // margin: 40px 10px;
+    // padding: 10px;
+    // max-width: 100%;
+    // // width: 100%;
+    // border: 1px solid #ddd;
+    // border-radius: 8px;
+    // background-color: #f9f9f9;
+    // box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
     margin: 40px 10px;
     padding: 10px;
     max-width: 100%;
@@ -13,7 +33,9 @@ h2{
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   }
 
+
   .title-button-container{
+    margin: 0 20px;
     display:flex;
     flex-direction: row;
     justify-content: space-between;
@@ -21,82 +43,114 @@ h2{
     
   }
 
-
   
   button{
     padding: 8px 8px;
-    margin: 10px 10px;
+    margin-left: 10px;
     border: none;
     border-radius: 4px;
     font-size: 14px;
     font-weight: bold;
     cursor: pointer;
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.1);
     transition: background-color 0.3s ease;
     text-decoration: none;
-    color: black;
+    color: #333;
     background-color: rgb(235, 220, 8);
   }
 
-  /* General table styling */
-.table {
+  .button-container :hover {
+    background-color: rgb(221, 207, 3);  }
+
+table {
+    // display: flex;
+    // flex: row;
     width: 100%;
     border-collapse: collapse;
-    margin: 20px 0;
+    // margin: 20px 0;
     font-size: 16px;
     text-align: left;
   }
   
-  /* Table header styling */
-  .table thead th {
+// //   /* Table header styling */
+  table thead th {
     background-color: #f4f4f4;
     color: #333;
     font-weight: bold;
     padding: 12px;
     border-bottom: 2px solid #ddd;
+   
   }
   
-  /* Table body row styling */
-  .table tbody tr {
-    border-bottom: 1px solid #ddd;
+//   /* Table body row styling */
+  table tbody tr {
+    border-bottom: none;
+    font-weight: bold;
+    color: #333;
+    
   }
   
-  /* Alternating row colors */
-  .table tbody tr:nth-child(even) {
-    background-color: #f9f9f9;
-  }
+
   
-  /* Hover effect for rows */
-  .table tbody tr:hover {
-    background-color: #f1f1f1;
-  }
+
   
-  /* Table cell styling */
-  .table tbody td, .table tbody th {
+//   /* Table cell styling */
+  table tbody td, .table tbody th {
     padding: 12px;
   }
   
-  /* Highlight for pending status */
-  .table tbody td:nth-child(5) {
+//   /* Highlight for pending status */
+  table tbody td:nth-child(5) {
     font-weight: bold;
     color: #e67e22; /* Orange color for pending status */
   }
-
-  p{
-    margin-left:10px;
+  
+  /* Styling for 'No property repairs pending' message */
+  .no-repairs-message {
+    font-size: 18px;
+    color: #777;
+    text-align: center;
+    margin-top: 20px;
   }
   
   /* Responsive design */
   @media (max-width: 768px) {
+
+    .button-container{
+      margin: auto;
+      display: flex;
+      align-self: flex-end;
+    }
+
+    // .title-button-container{
+    //   margin: 0 12px;
+    // }
+
+    .container {
+      width: auto;
+      // margin: 20px;
+    }
     .table {
       font-size: 14px;
     }
     .table thead {
-      display: none; /* Hide header for mobile */
+      display: none;/* Hide header for mobile */
     }
-    .table tbody tr {
-      display: block;
+
+    .table tbody td {
+      // width: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      flex-wrap: wrap;
       margin-bottom: 15px;
+
     }
+    table tbody th:nth-child(1){
+      display: none;
+    }
+    
+
     .table tbody td {
       display: block;
       text-align: right;
@@ -112,6 +166,8 @@ h2{
       font-weight: bold;
       text-align: left;
     }
-
-   }
+    .no-repairs-message {
+      font-size: 16px;
+    }
+  }
   

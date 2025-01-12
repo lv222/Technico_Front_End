@@ -1,21 +1,22 @@
-import { NgFor, NgIf } from '@angular/common';
+import { CommonModule, NgFor, NgIf } from '@angular/common';
 import { Component } from '@angular/core';
 import { RouterModule, RouterOutlet } from '@angular/router';
 import { RepairsService } from '../../services/repairs.service';
 import { Repair } from '../../model/repair';
 import { NavbarComponent } from '../navbar/navbar.component';
+import { DatePipe } from '@angular/common';
 
 
 @Component({
   selector: 'app-repairs',
   standalone: true,
-  imports: [RouterModule, NgIf, NgFor, NavbarComponent ],
+  imports: [RouterModule, NgIf, NgFor, NavbarComponent, CommonModule ],
   templateUrl: './repairs.component.html',
   styleUrl: './repairs.component.scss'
 })
 export class RepairsComponent {
   propertyRepairs?: Repair[];
- constructor(private service: RepairsService) {}
+ constructor(private service: RepairsService, private datePipe: DatePipe) {}
 
  ngOnInit(): void {
   this.getRepairs();
@@ -29,8 +30,17 @@ export class RepairsComponent {
     } else {
       this.propertyRepairs = [];
     }
+   
     console.log(this.propertyRepairs);
+    this.propertyRepairs?.forEach(repair => {
+      const slicedDate = repair.repairDate.slice(0, 10);
+      console.log(repair.repairDate);
+    })
+    
   });
+}
+userFriendlyDate(date: string | null | undefined):string {
+  return this.datePipe.transform(date, 'medium') || 'Invalid Date'
 }
 
 public hasPendingRepairs(): boolean {

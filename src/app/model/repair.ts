@@ -7,6 +7,6 @@ export interface Repair {
     description: string,
     address: string,
     status: string,
-    
+
     cost: number;
   }

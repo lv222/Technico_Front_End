@@ -1,10 +1,10 @@
 <app-navbar></app-navbar>
 
 
-
+<h2>Ongoing Repairs - Today</h2>
 
 <div class="container" *ngIf="propertyowner && propertyowner.length > 0">
-    <h2>Ongoing Repairs - Today</h2>
+    
     <div class="group" *ngFor="let owner of propertyowner">
       <p>Name: {{ owner.name }}</p>
       <p>Email: {{ owner.email }}</p>
