@@ -52,7 +52,14 @@ export class SignupComponent implements OnInit{
           Validators.minLength(5),
           Validators.maxLength(100),
         ],
-      ],
+        ],
+        phoneNumber: [
+          '',
+          [
+            Validators.required,
+            
+          ],
+          ],
       email: [
         '',
         [

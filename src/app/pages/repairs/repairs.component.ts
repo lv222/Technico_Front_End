@@ -14,7 +14,7 @@ import { NavbarComponent } from '../navbar/navbar.component';
   styleUrl: './repairs.component.scss'
 })
 export class RepairsComponent {
-  propertyrepairs?: Repair[];
+  propertyRepairs?: Repair[];
  constructor(private service: RepairsService) {}
 
  ngOnInit(): void {
@@ -24,11 +24,26 @@ export class RepairsComponent {
  private getRepairs() {
   this.service.getRepairs().subscribe((response: any) => {
     if (response && response.elements) {
-      this.propertyrepairs = response.elements;
+      console.log(response);
+      this.propertyRepairs = response.elements;
     } else {
-      this.propertyrepairs = [];
+      this.propertyRepairs = [];
     }
-    console.log(this.propertyrepairs);
+    console.log(this.propertyRepairs);
   });
+}
+
+public hasPendingRepairs(): boolean {
+  // do we have any repairs at all?
+  if (this.propertyRepairs === undefined) {
+    return false;
+  } else {
+    // do we have any repairs with status Pending?
+    const containsPropertyRepairWithPendingStatus = this.propertyRepairs?.some(propertyRepair => {
+      return propertyRepair.status === "Pending";
+    });
+
+    return containsPropertyRepairWithPendingStatus;
+  }
 }
 }

@@ -28,6 +28,7 @@ export class AdminHomeComponent implements OnInit {
   private getUsers() {
     this.service.getUsers().subscribe((response: any) => {
       if (response && response.elements) {
+        console.log(response.userType);
         this.propertyowner = response.elements;
       } else {
         this.propertyowner = [];

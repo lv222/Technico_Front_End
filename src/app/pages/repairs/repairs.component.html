@@ -33,9 +33,9 @@
             </tr>
           </thead>
           <tbody>
-            <ng-container *ngIf="propertyrepairs && propertyrepairs.length ">
-              <ng-container *ngFor="let repair of propertyrepairs">
-                <tr >
+            <ng-container *ngIf="propertyRepairs && propertyRepairs.length>0 ">
+              <ng-container *ngFor="let repair of propertyRepairs">
+                <tr *ngIf="repair.status === 'Pending'" >
                   <th scope="row">1</th>
                   <td>{{repair.vat}} </td>
                   <td>{{repair.typeOfRepair}} </td>
@@ -54,7 +54,7 @@
             
           </tbody>
         </table>
-        <p *ngIf="!propertyrepairs || propertyrepairs.length === 0">No property repairs pending.</p>
+        <p *ngIf="!hasPendingRepairs()">No property repairs pending.</p>
       </div>
     </div>
     
