@@ -1,5 +1,5 @@
-import { CanActivateFn, Router } from '@angular/router';
-import { AuthService } from './auth.service';
+import { CanActivate, CanActivateFn, Router } from '@angular/router';
+import { AuthService } from '../services/auth/auth.service';
 import { inject } from '@angular/core';
 
 
@@ -12,11 +12,13 @@ export const authGuard: CanActivateFn = (route, state) => {
 
     if (userType === 'Admin') {
       router.navigate(['/admin-home']);
-      return false; // Prevent navigation if already redirected to admin home
+      return false;  // Prevent navigation if already redirected to admin home
     } else if (userType === 'User') {
       router.navigate(['/user-home']);
       return false; // Prevent navigation if already redirected to user home
     }
+
+  
 
     // If the user type is unknown or not found
     router.navigate(['/login']);

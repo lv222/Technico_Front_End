@@ -7,9 +7,9 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
   providedIn: 'root'
 })
 export class PropertyOwnerService {
-  publishData(propertyowner: PropertyOwner[]) {
-    throw new Error('Method not implemented.');
-  }
+  // publishData(propertyowner: PropertyOwner[]) {
+  //   throw new Error('Method not implemented.');
+  // }
 private URL = 'https://localhost:7108/api'
   
   constructor(private httpClient: HttpClient) { }
@@ -31,4 +31,31 @@ private URL = 'https://localhost:7108/api'
       return this.httpClient.get<PropertyOwner[]>(`${this.URL}/PropertyOwners`,{headers}).pipe(map((response: any) => response));
   };
 
+  getUsersByVatAndEmail(vat: string, email?: string): Observable<PropertyOwner[]> {
+		const token = localStorage.getItem('token');
+		if (!token) {
+			throw new Error('No token found');
+		}
+		const headers = new HttpHeaders({
+			'Content-Type': 'application/json',
+			'Authorization': `Bearer ${token}`
+		});
+
+		return this.httpClient.get<PropertyOwner[]>(`${this.URL}/PropertyOwners/${vat}`, { headers }).pipe(map((response: any) => response));
+	};
+
+	deletePropertyOwnerByVat(vat: string): Observable<PropertyOwner> {
+		const token = localStorage.getItem('token');
+		if (!token) {
+			throw new Error('No token found');
+		}
+		const headers = new HttpHeaders({
+			'Content-Type': 'application/json',
+			'Authorization': `Bearer ${token}`
+		});
+
+		return this.httpClient.delete<PropertyOwner[]>(`${this.URL}/PropertyOwners/${vat}`, { headers }).pipe(map((response: any) => response));
+	};
+
 }
+

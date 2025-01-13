@@ -31,10 +31,13 @@ export class AuthService {
         }),
     });
 }
+
 isTokenPresent(): boolean {
   const token = localStorage.getItem('token');
   return token ? true : false;
 }
+
+
 
 // Method to decode the token and retrieve the user type (admin, user, etc.)
 getUserType(): string {
@@ -44,7 +47,7 @@ getUserType(): string {
     try {
       const decodedToken: any = jwtDecode(token); // Decode the token
 
-      // Assuming 'userType' is a property in the payload
+      
       return decodedToken?.userType || 'User'; // Default to 'User' if no userType exists
     } catch (error) {
       console.error('Error decoding JWT:', error);

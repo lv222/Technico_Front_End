@@ -1,0 +1,12 @@
+<app-navbar></app-navbar>
+
+<h1>Property owner details for {{propertyOwnerId}}</h1>
+
+<div class="container">
+	<div class="row">
+		<div class="container">
+			<input disabled type="text" [value]="propertyOwnerId" readonly>
+			<button (click)="deletePropertyOwner()">Delete Property Owner</button>
+		</div>
+	</div>
+</div>

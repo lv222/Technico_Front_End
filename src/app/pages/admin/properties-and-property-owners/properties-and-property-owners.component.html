@@ -1,0 +1,48 @@
+<app-navbar></app-navbar>
+
+<h1>Properties</h1>
+
+<button routerLink="/property-owner-search"
+routerLinkActive="activebutton"
+ariaCurrentWhenActive="page">Search User</button>
+<div class="container">
+	<div class="row">
+		<table class="table">
+			<thead>
+				<tr>
+					<th>vat</th>
+					<th>address</th>
+					<!-- <th>email</th> -->
+					<th>Construction Year</th>
+					<th>Property Type</th>
+					<!-- 
+					<th>surname</th>
+					 -->
+					 <th></th>
+				</tr>
+			</thead>
+			<tbody>
+				<ng-container *ngFor="let propertyItem of propertyItems">
+					<tr >
+						<td>{{propertyItem.vat}} </td>
+						<td>{{propertyItem.address}} </td>
+						<!-- <td>{{propertyOwner.email}} </td> -->
+						<td>{{propertyItem.constructionYear}} </td> 
+						<td>{{propertyItem.propertyType}} </td>
+						<!--
+						<td>{{propertyOwner.surname}} </td>
+						<td>{{propertyOwner.userType}} </td> -->
+
+						<td>
+							<a  [routerLink]="['/properties-and-property-owners/property-owner', propertyItem.vat]"
+								class="nav-link">
+								Details
+							</a>
+						</td>
+						
+					</tr>
+				</ng-container>
+			</tbody>
+		</table>
+	</div>
+</div>

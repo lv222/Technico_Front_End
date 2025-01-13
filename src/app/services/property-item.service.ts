@@ -18,7 +18,7 @@ export class PropertyItemService {
   
   
     
-      getUsers(): Observable<PropertyItem[]> {
+      getProperties(): Observable<PropertyItem[]> {
         const token = localStorage.getItem('token');
         if (!token) {
           throw new Error('No token found');

@@ -21,7 +21,7 @@ h2{
     // max-width: 100%;
     // // width: 100%;
     // border: 1px solid #ddd;
-    // border-radius: 8px;
+    border-radius: 8px;
     // background-color: #f9f9f9;
     // box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
     margin: 40px 10px;
@@ -63,13 +63,14 @@ h2{
     background-color: rgb(221, 207, 3);  }
 
 table {
-    // display: flex;
-    // flex: row;
+    // // display: flex;
+    // // flex: row;
     width: 100%;
     border-collapse: collapse;
     // margin: 20px 0;
     font-size: 16px;
-    text-align: left;
+    text-align: right;
+    // border-bottom: 1px sol;
   }
   
 // //   /* Table header styling */
@@ -77,16 +78,19 @@ table {
     background-color: #f4f4f4;
     color: #333;
     font-weight: bold;
-    padding: 12px;
+    padding: 12px 0;
     border-bottom: 2px solid #ddd;
+    border-collapse: collapse;
    
   }
   
 //   /* Table body row styling */
   table tbody tr {
-    border-bottom: none;
-    font-weight: bold;
+    border-bottom: 1px solid  #ddd;
+    // font-weight: bold;
     color: #333;
+    border-collapse: collapse;
+    
     
   }
   
@@ -96,11 +100,13 @@ table {
   
 //   /* Table cell styling */
   table tbody td, .table tbody th {
-    padding: 12px;
+    padding: 12px 0;
+    border-bottom: 1px;
+    border-collapse: collapse;
   }
   
 //   /* Highlight for pending status */
-  table tbody td:nth-child(5) {
+  table tbody td:nth-child(9) {
     font-weight: bold;
     color: #e67e22; /* Orange color for pending status */
   }
@@ -132,6 +138,8 @@ table {
     }
     .table {
       font-size: 14px;
+      border-collapse: collapse;
+      text-align: left;
     }
     .table thead {
       display: none;/* Hide header for mobile */
@@ -140,32 +148,36 @@ table {
     .table tbody td {
       // width: 100%;
       display: flex;
+      padding:4px;
       flex-direction: column;
       justify-content: center;
       flex-wrap: wrap;
-      margin-bottom: 15px;
+      margin: 5px 0;
+      
+     
+      text-align: left;
 
     }
-    table tbody th:nth-child(1){
-      display: none;
-    }
+    // table tbody th:nth-child(1){
+    //   display: none;
+    // }
     
 
-    .table tbody td {
-      display: block;
-      text-align: right;
-      position: relative;
-      padding-left: 50%;
-    }
-    .table tbody td:before {
-      content: attr(data-label);
-      position: absolute;
-      left: 0;
-      width: 45%;
-      padding-left: 15px;
-      font-weight: bold;
-      text-align: left;
-    }
+    // .table tbody td {
+    //   display: block;
+    //   text-align: right;
+    //   position: relative;
+    //   padding-left: 50%;
+    // }
+    // .table tbody td:before {
+    //   content: attr(data-label);
+    //   position: absolute;
+    //   left: 0;
+    //   width: 45%;
+    //   padding-left: 15px;
+    //   font-weight: bold;
+    //   text-align: left;
+    // }
     .no-repairs-message {
       font-size: 16px;
     }

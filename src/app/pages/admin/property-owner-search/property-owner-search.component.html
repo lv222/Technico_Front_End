@@ -1,0 +1,53 @@
+<app-navbar></app-navbar>
+
+<div class="container">
+	<div class="row">
+		<form #searchForm="ngForm">
+			<div>
+				<div>
+					<input [(ngModel)]="vatSearchInput" name="searchQuery" placeholder="Enter VAT to search">
+				</div>
+				<div>
+					<input [(ngModel)]="emailSearchInput" name="searchQuery" placeholder="Enter email to search">
+				</div>
+			</div>
+			<div>
+				<button (click)="onServerSearch()">Search (server)</button>
+			</div>
+			<div>
+				<button (click)="onFrontendSearch()">Search (frontend)</button>
+			</div>
+			<div>
+				<button (click)="resetSearchResult()">Reset search results</button>
+			</div>
+		</form>
+
+		<table class="table">
+			<thead>
+				<tr>
+					<th>vat</th>
+					<th>address</th>
+					<th>email</th>
+					<th>name</th>
+					<th>phoneNumber</th>
+					<th>surname</th>
+					<th>userType</th>
+				</tr>
+			</thead>
+			<tbody>
+				<ng-container *ngFor="let propertyOwner of propertyOwners">
+					<tr>
+						<td>{{propertyOwner.vat}} </td>
+						<td>{{propertyOwner.address}} </td>
+						<td>{{propertyOwner.email}} </td>
+						<td>{{propertyOwner.name}} </td>
+						<td>{{propertyOwner.phoneNumber}} </td>
+						<td>{{propertyOwner.surname}} </td>
+						<td>{{propertyOwner.userType}} </td>
+
+					</tr>
+				</ng-container>
+			</tbody>
+		</table>
+	</div>
+</div>

@@ -13,7 +13,15 @@ export class RepairsService {
     constructor(private httpClient: HttpClient) { }
   
   
-  
+    createRepair(data: any) {
+      const token = localStorage.getItem('token');
+      const headers = new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`
+      });
+      return this.httpClient.post(`${this.URL}/Repairs`, data, { headers });
+     
+    }
   
     
     getRepairs(): Observable<Repair[]> {

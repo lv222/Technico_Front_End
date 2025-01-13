@@ -1,0 +1,50 @@
+<div class="container">
+    
+    <div class="card-title">
+      
+        <h1>Register a repair</h1>
+
+    </div>
+    <form class="form-group-repairs"[formGroup] ="repairRegisterForm" (ngSubmit)="onSubmit()">
+        <label>Property Id</label>
+        <input 
+            type="text" 
+            name="propertyItemId" 
+            placeholder="Property Id" 
+            formControlName="propertyItemId">
+        <label>Vat</label>
+        <input 
+            type="text" 
+            name="vat" 
+            placeholder="Vat" 
+            formControlName="vat">
+        <label>Adresss</label>
+        <input 
+            type="text" 
+            name="address" 
+            placeholder="Address" 
+            formControlName="address">
+        <label>Repair Date</label>
+        <input 
+            type="repairDate" 
+            name="repairDate" 
+            placeholder="Repair Date" 
+            formControlName="repairDate">
+        <label>Repair Type</label>
+        <input 
+            type="repairType" 
+            name="repairType" 
+            placeholder="Repair Type" 
+            formControlName="repairType">
+        <label>Cost</label>
+        <input 
+            type="cost" 
+            name="cost" 
+            placeholder="Cost" 
+            formControlName="cost">
+            
+       
+    </form>
+    <div class="btn"> <input type="submit" value="Create Repair"></div>
+    <span>Back to </span><a routerLink="/repairs">Repairs</a>
+</div>

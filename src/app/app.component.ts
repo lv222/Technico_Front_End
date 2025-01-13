@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, RouterOutlet } from '@angular/router';
-import { AdminHomeComponent } from "./pages/admin-home/admin-home.component";
+import { AdminHomeComponent } from "./pages/admin/admin-home/admin-home.component";
 import { LoginComponent } from "./pages/login/login.component";
 import { NgIf } from '@angular/common';
-import { NavbarComponent } from "./pages/navbar/navbar.component";
+import { NavbarComponent } from "./shared/navbar/navbar.component";
 import { AuthService } from './services/auth/auth.service';
 
 @Component({

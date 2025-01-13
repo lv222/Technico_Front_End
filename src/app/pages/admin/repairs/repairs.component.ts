@@ -1,9 +1,9 @@
 import { CommonModule, NgFor, NgIf } from '@angular/common';
 import { Component } from '@angular/core';
 import { RouterModule, RouterOutlet } from '@angular/router';
-import { RepairsService } from '../../services/repairs.service';
-import { Repair } from '../../model/repair';
-import { NavbarComponent } from '../navbar/navbar.component';
+import { RepairsService } from '../../../services/repairs.service';
+import { Repair } from '../../../model/repair';
+import { NavbarComponent } from '../../../shared/navbar/navbar.component';
 import { DatePipe } from '@angular/common';
 
 
@@ -32,14 +32,14 @@ export class RepairsComponent {
     }
    
     console.log(this.propertyRepairs);
-    this.propertyRepairs?.forEach(repair => {
-      const slicedDate = repair.repairDate.slice(0, 10);
-      console.log(repair.repairDate);
-    })
+    // this.propertyRepairs?.forEach(repair => {
+    //   const slicedDate = repair.repairDate.toISOString().slice(0, 10);
+    //   console.log(repair.repairDate);
+    // })
     
   });
 }
-userFriendlyDate(date: string | null | undefined):string {
+userFriendlyDate(date: string | null | undefined) {
   return this.datePipe.transform(date, 'medium') || 'Invalid Date'
 }
 
