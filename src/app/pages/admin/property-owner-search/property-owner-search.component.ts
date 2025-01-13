@@ -1,38 +1,61 @@
 import { Component, NgModule } from '@angular/core';
 import { PropertyOwner } from '../../../model/property-owner';
-import { PropertyOwnerService } from '../../../services/property-owner.service';
+import { PropertyOwnerService, VatAndEmail } from '../../../services/property-owner.service';
 import { FormsModule, NgModel } from '@angular/forms';
-import { NgFor } from '@angular/common';
+import { NgFor, NgIf } from '@angular/common';
 import { NavbarComponent } from "../../../shared/navbar/navbar.component";
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-property-owner-search',
   standalone: true,
-  imports: [FormsModule, NgFor, NavbarComponent],
+  imports: [FormsModule, NgFor, NavbarComponent, NgIf],
   templateUrl: './property-owner-search.component.html',
   styleUrl: './property-owner-search.component.scss'
 })
 export class PropertyOwnerSearchComponent {
+	searchPerformed = false;
 	public allPropertyOwners: PropertyOwner[] = [];
 	public propertyOwners: PropertyOwner[] = [];
 	public vatSearchInput: string = '';
 	public emailSearchInput: string = '';
+	
+	
 
-	constructor(private propertyOwnerService: PropertyOwnerService) { }
+	constructor(
+			private route: ActivatedRoute,
+			private propertyOwnerService: PropertyOwnerService,
+			private router: Router
+		) { }
 
-	ngOnInit(): void {
+	ngOnInit() {
 		this.getPropertyOwners();
+		
 	}
 
-	// fetches the PropertyOwners based on search field values
+	
 	public onServerSearch(): void {
-		this.propertyOwnerService.getUsersByVatAndEmail(this.vatSearchInput).subscribe((response: any) => {
-			if (response) {
+		this.searchPerformed = true;
+
+			// if both search fields are empty we should not search
+			if (this.vatSearchInput === "" && this.emailSearchInput === "") {
+				return;
+			}
+		// if they are empty we pass undefined, this way we can easily construct
+		// the URL parameters
+		const searchParameters: VatAndEmail = {
+			vat: this.vatSearchInput !== "" ? this.vatSearchInput : undefined,
+			email: this.emailSearchInput !== "" ? this.emailSearchInput : undefined,
+		};
+
+		this.propertyOwnerService.getUsersByVatAndEmail(searchParameters).subscribe((response: any) => {
+			if (response && response.elements) {
 				// the endpoint returns a single object instead of an array
 				// (like the /api/PropertyOwners does) of
 				// objects so we have to place the data into an array
-				const propertyOwnersArray: PropertyOwner[] = [response];
+				const propertyOwnersArray: PropertyOwner[] = response.elements;
 				this.propertyOwners = propertyOwnersArray;
+				
 			} else {
 				this.propertyOwners = [];
 			}
@@ -42,6 +65,11 @@ export class PropertyOwnerSearchComponent {
 	// filters the PropertyOwners based on search field values. This expects the
 	// Property 
 	public onFrontendSearch(): void {
+
+				// if both search fields are empty we should not search
+				if (this.vatSearchInput === "" && this.emailSearchInput === "") {
+					return;
+				}
 		// we initiate an empty array to place the filtering results
 		let filteredPropertyOwners: PropertyOwner[] = [];
 
@@ -68,7 +96,10 @@ export class PropertyOwnerSearchComponent {
 		this.vatSearchInput = "";
 		this.emailSearchInput = "";
 		this.propertyOwners = [];
+		this.searchPerformed = false;
 	}
+	
+
 
 	private getPropertyOwners() {
 		this.propertyOwnerService.getUsers().subscribe((response: any) => {

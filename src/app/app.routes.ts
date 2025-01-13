@@ -15,7 +15,7 @@ export const routes: Routes = [
   {path:'',  component: LoginComponent, canActivate: [authGuard]},
     { path: 'admin-home', component: AdminHomeComponent}, 
     { path: 'user-home', component: UserHomeComponent },
-    { path: 'repairs', component: RepairsComponent},
+    { path: 'repairs', component: RepairsComponent, canActivate: [repairNavGuard]},
     { path: 'create-repair', component: CreateRepairComponent},
     { path: 'login', component: LoginComponent},
     { path: 'signup', component: SignupComponent},

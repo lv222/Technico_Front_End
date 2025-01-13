@@ -22,7 +22,7 @@ export class AdminHomeComponent implements OnInit {
 
   constructor(private service:RepairsService) {}
 
-  ngOnInit(): void {
+  ngOnInit() {
     this.getRepairs();
     // this.checkDateMatch();
   }

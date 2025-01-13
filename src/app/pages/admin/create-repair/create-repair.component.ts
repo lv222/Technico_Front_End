@@ -22,7 +22,7 @@ export class CreateRepairComponent implements OnInit {
 constructor(private service: RepairsService, private router: Router, private fb: FormBuilder) {}
 
 
-ngOnInit(): void {
+ngOnInit() {
   this.repairRegisterForm = this.fb.group({
     propertyItemId: [
       '',

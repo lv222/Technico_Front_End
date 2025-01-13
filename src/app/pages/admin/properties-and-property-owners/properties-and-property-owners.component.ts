@@ -22,7 +22,7 @@ export class PropertiesAndPropertyOwnersComponent {
 
 	constructor(private propertyOwnerService: PropertyOwnerService, private propertyItemService: PropertyItemService) { }
 
-	ngOnInit(): void {
+	ngOnInit() {
 		this.getPropertyOwners();
 		this.getPropertyItems();
 	}

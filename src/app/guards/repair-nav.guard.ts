@@ -10,8 +10,8 @@ export const repairNavGuard: CanActivateFn = (route, state) => {
       const userType = authService.getUserType(); // Get the userType from decoded JWT
   
       if (userType === 'Admin') {
-        router.navigate(['/repairs']);
-        return false;  // Prevent navigation if already redirected to admin home
+       
+        return true;  // Prevent navigation if already redirected to admin home
       } else if (userType === 'User') {
         router.navigate(['/']);
         return false; // Prevent navigation if already redirected to user home
