@@ -71,4 +71,50 @@ export class RepairsService {
 
     return this.httpClient.get(`${this.URL}/Repairs`, { params, headers });
   }
+
+  searchTodayRepairs(
+    currentPage: number,
+    pageSize: number,
+    filters: any,
+    token: string | null
+  ): Observable<any> {
+    if (!token) {
+      throw new Error('No token found');
+    }
+
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${token}`,
+    });
+
+    let params = new HttpParams()
+      .set('Page', currentPage.toString())
+      .set('PageSize', pageSize.toString());
+
+    //set local dates
+    const today = new Date();
+    const todayAthens = new Date(
+      today.toLocaleString('en-US', { timeZone: 'Europe/Athens' })
+    );
+    todayAthens.setHours(0, 0, 0, 0);
+
+    const tomorrow = new Date(today);
+    tomorrow.setDate(today.getDate() + 1);
+    const tomorrowAthens = new Date(
+      tomorrow.toLocaleString('en-US', { timeZone: 'Europe/Athens' })
+    );
+    tomorrowAthens.setHours(0, 0, 0, 0);
+    //set ISO format
+    const todayISO = todayAthens.toISOString();
+    const tomorrowISO = tomorrowAthens.toISOString();
+
+    // Sending today's date as minDate and maxDate to the server
+    params = params.set('MinDate', todayISO).set('MaxDate', tomorrowISO);
+
+    if (filters.vat) {
+      params = params.set('Vat', filters.vat);
+    }
+
+    return this.httpClient.get(`${this.URL}/Repairs`, { params, headers });
+  }
 }

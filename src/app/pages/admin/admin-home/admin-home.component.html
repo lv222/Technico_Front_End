@@ -6,7 +6,7 @@
   <div class="group" *ngFor="let repair of propertyRepair">
     <p>Owner Vat: {{ repair.vat }}</p>
     <p>Repair Id: {{ repair.id }}</p>
-    <p>Repair Date: {{ repair.repairDate }}</p>
+    <p>Repair Date: {{ userFriendlyDate(repair.repairDate.toString()) }}</p>
     <p>Repair Type: {{ repair.typeOfRepair }}</p>
     <p>Repair Description: {{ repair.description }}</p>
   </div>
