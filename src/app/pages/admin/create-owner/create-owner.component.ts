@@ -16,7 +16,7 @@ import { AuthService } from '../../../services/auth/auth.service';
   styleUrl: './create-owner.component.scss',
 })
 export class CreateOwnerComponent {
-  public createOwnerForm!: FormGroup;
+  createOwnerForm!: FormGroup;
 
   constructor(
     private authService: AuthService,

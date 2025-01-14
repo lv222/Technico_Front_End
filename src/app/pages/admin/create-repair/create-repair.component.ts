@@ -20,9 +20,8 @@ import { NavbarComponent } from '../../../shared/navbar/navbar.component';
   styleUrl: './create-repair.component.scss',
 })
 export class CreateRepairComponent implements OnInit {
-  repairRegisterForm!: FormGroup;
   minDateTime: string = '';
-
+  repairRegisterForm!: FormGroup;
   constructor(
     private fb: FormBuilder,
     private service: RepairsService,
@@ -36,6 +35,7 @@ export class CreateRepairComponent implements OnInit {
       address: ['', [Validators.required, Validators.minLength(5)]], // Sample address validation
       repairDate: ['Painting', [Validators.required]],
       repairType: ['', [Validators.required]],
+      description: ['', Validators.required],
       cost: ['', [Validators.required]],
       vat: [
         '',

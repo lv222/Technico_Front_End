@@ -1,1 +1,38 @@
-<p>search-repair works!</p>
+<div class="search-form">
+  <form [formGroup]="searchForm" (ngSubmit)="searchRepairs()">
+    <div>
+      <label for="vat">VAT:</label>
+      <input id="vat" formControlName="vat" type="text" />
+    </div>
+    <div>
+      <label for="minDate">Min Date:</label>
+      <input id="minDate" formControlName="minDate" type="date" />
+    </div>
+    <div>
+      <label for="maxDate">Max Date:</label>
+      <input id="maxDate" formControlName="maxDate" type="date" />
+    </div>
+    <button type="submit">Search</button>
+  </form>
+</div>
+
+<div class="repair-list">
+  <ul>
+    <li *ngFor="let repair of repairs">
+      {{ repair.vat }} - {{ repair.repairDate }} - {{ repair.description }}
+    </li>
+  </ul>
+</div>
+
+<div class="pagination">
+  <button (click)="onPageChange(currentPage - 1)" [disabled]="currentPage <= 1">
+    Previous
+  </button>
+  <span>Page {{ currentPage }}</span>
+  <button
+    (click)="onPageChange(currentPage + 1)"
+    [disabled]="currentPage * pageSize >= totalCount"
+  >
+    Next
+  </button>
+</div>

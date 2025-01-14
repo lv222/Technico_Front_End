@@ -1,6 +1,11 @@
 <div class="parent-container">
   <div class="login-container">
-    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="login-form">
+    <form
+      [formGroup]="loginForm"
+      (ngSubmit)="onSubmit()"
+      autocomplete="off"
+      class="login-form"
+    >
       <h1>Technico</h1>
       <span class="login-details">Please use your credentials to sign in</span>
 

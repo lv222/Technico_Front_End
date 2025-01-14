@@ -2,7 +2,12 @@
   <div class="card-title">
     <h1>Create Account</h1>
   </div>
-  <form class="form-group" [formGroup]="signupForm" (ngSubmit)="onSubmit()">
+  <form
+    class="form-group"
+    [formGroup]="signupForm"
+    (ngSubmit)="onSubmit()"
+    autocomplete="off"
+  >
     <input type="text" name="name" placeholder="Name" formControlName="name" />
     <input
       type="text"

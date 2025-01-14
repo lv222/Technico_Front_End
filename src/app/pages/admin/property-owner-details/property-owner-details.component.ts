@@ -9,18 +9,19 @@ import {
 } from '@angular/forms';
 import { PropertyOwner } from '../../../model/property-owner';
 import { NavbarComponent } from '../../../shared/navbar/navbar.component';
+import { updateOwner } from '../../../model/update-owner';
 
 @Component({
   selector: 'app-property-owner-details',
   standalone: true,
-  imports: [NavbarComponent, ReactiveFormsModule, RouterModule],
+  imports: [ReactiveFormsModule, RouterModule],
   templateUrl: './property-owner-details.component.html',
   styleUrl: './property-owner-details.component.scss',
 })
 export class PropertyOwnerDetailsComponent implements OnInit {
   propertyOwnerId: string = '';
-  propertyOwner: PropertyOwner | undefined;
-  public updateForm!: FormGroup;
+  propertyOwner: updateOwner | undefined;
+  updateForm!: FormGroup;
 
   constructor(
     private route: ActivatedRoute,
@@ -44,8 +45,8 @@ export class PropertyOwnerDetailsComponent implements OnInit {
     // Fetch property owner details from the service using the ID
     this.propertyOwnerService
       .getPropertyOwnerById(this.propertyOwnerId)
-      .subscribe(
-        (response: PropertyOwner) => {
+      .subscribe({
+        next: (response: updateOwner) => {
           this.propertyOwner = response;
 
           // Initialize the form with fetched data
@@ -84,16 +85,7 @@ export class PropertyOwnerDetailsComponent implements OnInit {
               this.propertyOwner.email,
               [Validators.required, Validators.email], // Validate email format
             ],
-            password: [
-              '',
-              [
-                Validators.required,
-                Validators.minLength(8),
-                Validators.pattern(
-                  '(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[!@#$%^&*]).*' // Password validation
-                ),
-              ],
-            ],
+            // password: ['12aW$ffff', [Validators.required]],
             vat: [
               this.propertyOwner.vat,
               [
@@ -105,10 +97,14 @@ export class PropertyOwnerDetailsComponent implements OnInit {
             ],
           });
         },
-        (error) => {
-          console.error('Error loading property owner details:', error);
-        }
-      );
+        error: (err) => {
+          console.error('Error loading property owner details:', err);
+          // Handle the error gracefully, e.g., show a message to the user
+        },
+        complete: () => {
+          console.log('Property owner details loaded successfully.');
+        },
+      });
   }
 
   public onSubmit() {
@@ -132,7 +128,7 @@ export class PropertyOwnerDetailsComponent implements OnInit {
       .deletePropertyOwnerByVat(this.propertyOwnerId)
       .subscribe((response: any) => {
         if (response) {
-          this.router.navigate(['/']);
+          this.router.navigate(['/repairs']);
         } else {
           // Handle failure case if needed
           console.error('Error deleting property owner');

@@ -6,6 +6,8 @@
     class="form-group-create-owner"
     [formGroup]="createOwnerForm"
     (ngSubmit)="onSubmitCreateOwner()"
+    autocomplete="off"
+    autocapitalize="on"
   >
     <label>Name</label>
     <input type="text" name="name" placeholder="Name" formControlName="name" />

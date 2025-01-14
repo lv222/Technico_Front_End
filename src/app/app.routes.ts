@@ -83,4 +83,11 @@ export const routes: Routes = [
         './pages/admin/property-owner-details/property-owner-details.component'
       ).then((m) => m.PropertyOwnerDetailsComponent),
   },
+  // {
+  //   path: 'properties-and-property-owners/property-owner/',
+  //   loadComponent: () =>
+  //     import(
+  //       './pages/admin/property-owner-details/property-owner-details.component'
+  //     ).then((m) => m.PropertyOwnerDetailsComponent),
+  // },
 ];

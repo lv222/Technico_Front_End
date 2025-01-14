@@ -1,4 +1,4 @@
-export interface PropertyOwner {
+export interface updateOwner {
   vat: string;
   name: string;
   surname: string;

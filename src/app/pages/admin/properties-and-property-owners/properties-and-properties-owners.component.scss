@@ -56,6 +56,10 @@ button {
   background-color: rgb(235, 220, 8);
 }
 
+// .button-container {
+//   margin: 20px 0;
+// }
+
 .button-container :hover {
   background-color: rgb(221, 207, 3);
 }
@@ -111,7 +115,7 @@ table tbody td:nth-child(9) {
 }
 
 /* Responsive design */
-@media (max-width: 768px) {
+@media (max-width: 767px) {
   .button-container {
     margin: auto;
     display: flex;
