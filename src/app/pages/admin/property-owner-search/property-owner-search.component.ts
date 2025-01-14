@@ -51,9 +51,6 @@ export class PropertyOwnerSearchComponent {
       .getUsersByVatAndEmail(searchParameters)
       .subscribe((response: any) => {
         if (response && response.elements) {
-          // the endpoint returns a single object instead of an array
-          // (like the /api/PropertyOwners does) of
-          // objects so we have to place the data into an array
           const propertyOwnersArray: PropertyOwner[] = response.elements;
           this.propertyOwners = propertyOwnersArray;
         } else {

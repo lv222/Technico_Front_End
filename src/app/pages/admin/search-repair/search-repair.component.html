@@ -1,4 +1,104 @@
-<div class="search-form">
+<app-navbar></app-navbar>
+
+<div class="title-button-container">
+  <div>
+    <h2 class="title">Search Repairs</h2>
+    <div class="form">
+      <form
+        [formGroup]="searchForm"
+        class="search-form"
+        (ngSubmit)="searchRepairs()"
+      >
+        <div class="search-container">
+          <div class="search-input">
+            <input
+              type="date"
+              formControlName="minDate"
+              placeholder="Enter Min Date"
+              class="form-control"
+            />
+          </div>
+          <div class="search-input">
+            <input
+              type="date"
+              formControlName="maxDate"
+              placeholder="Enter Max Date"
+              class="form-control"
+            />
+          </div>
+          <div class="search-buttons">
+            <button type="submit" class="btn btn-primary">Search</button>
+            <button
+              type="button"
+              (click)="resetSearch()"
+              class="btn btn-secondary"
+            >
+              Reset
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <table class="table" *ngIf="repairs.length > 0; else noData">
+    <thead>
+      <tr>
+        <th>Id</th>
+        <th>Owner Vat</th>
+        <th>Property Id</th>
+        <th>Address</th>
+        <th>Repair Date</th>
+        <th>Repair Type</th>
+        <th>Description</th>
+        <th>Cost</th>
+        <th>Status</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let repair of repairs">
+        <td>{{ repair.id }}</td>
+        <td>{{ repair.vat }}</td>
+        <td>{{ repair.propertyItemId }}</td>
+        <td>{{ repair.address }}</td>
+        <td>{{ userFriendlyDate(repair.repairDate.toString()) }}</td>
+        <td>{{ repair.typeOfRepair }}</td>
+        <td>{{ repair.description }}</td>
+        <td>{{ repair.cost }}</td>
+        <td>{{ repair.status }}</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <ng-template #noData>
+    <p *ngIf="searchPerformed">
+      No repairs found for the given search criteria.
+    </p>
+    <p *ngIf="!searchPerformed">Use the search form to find repairs.</p>
+  </ng-template>
+</div>
+
+<div class="pagination" *ngIf="repairs.length > 0">
+  <button
+    (click)="onPageChange(currentPage - 1)"
+    [disabled]="currentPage <= 1"
+    class="btn btn-outline-primary"
+  >
+    Previous
+  </button>
+  <span>Page {{ currentPage }}</span>
+  <button
+    (click)="onPageChange(currentPage + 1)"
+    [disabled]="currentPage * pageSize >= totalCount"
+    class="btn btn-outline-primary"
+  >
+    Next
+  </button>
+</div>
+
+<!-- <div class="search-form">
   <form [formGroup]="searchForm" (ngSubmit)="searchRepairs()">
     <div>
       <label for="vat">VAT:</label>
@@ -35,4 +135,4 @@
   >
     Next
   </button>
-</div>
+</div> -->
