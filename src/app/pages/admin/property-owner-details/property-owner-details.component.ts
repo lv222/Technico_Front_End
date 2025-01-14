@@ -1,16 +1,21 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { PropertyOwnerService } from '../../../services/property-owner.service';
-import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import {
+  FormBuilder,
+  FormGroup,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
 import { PropertyOwner } from '../../../model/property-owner';
 import { NavbarComponent } from '../../../shared/navbar/navbar.component';
 
 @Component({
-	selector: 'app-property-owner-details',
-	standalone: true,
-	imports: [NavbarComponent, ReactiveFormsModule, RouterModule],
-	templateUrl: './property-owner-details.component.html',
-	styleUrl: './property-owner-details.component.scss'
+  selector: 'app-property-owner-details',
+  standalone: true,
+  imports: [NavbarComponent, ReactiveFormsModule, RouterModule],
+  templateUrl: './property-owner-details.component.html',
+  styleUrl: './property-owner-details.component.scss',
 })
 export class PropertyOwnerDetailsComponent implements OnInit {
   propertyOwnerId: string = '';
@@ -25,10 +30,10 @@ export class PropertyOwnerDetailsComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-	const token = localStorage.getItem('token');
-	if (!token) {
-	  this.router.navigate(['/login']); // redirect to login if no token
-	}
+    // const token = localStorage.getItem('token');
+    // if (!token) {
+    //   this.router.navigate(['/login']); // redirect to login if no token
+    // }
     this.route.params.subscribe((params) => {
       this.propertyOwnerId = params['id'];
       this.loadPropertyOwnerDetails(); // Ensure method is called here
@@ -37,64 +42,73 @@ export class PropertyOwnerDetailsComponent implements OnInit {
 
   loadPropertyOwnerDetails(): void {
     // Fetch property owner details from the service using the ID
-    this.propertyOwnerService.getPropertyOwnerById(this.propertyOwnerId).subscribe(
-      (response: PropertyOwner) => {
-        this.propertyOwner = response;
-        
-        // Initialize the form with fetched data
-        this.updateForm = this.fb.group({
-          name: [
-            this.propertyOwner.name,
-            [
-              Validators.required,
-              Validators.minLength(2),
-              Validators.maxLength(50),
-              Validators.pattern('^[a-zA-Z ]+$'), // Only letters and spaces
+    this.propertyOwnerService
+      .getPropertyOwnerById(this.propertyOwnerId)
+      .subscribe(
+        (response: PropertyOwner) => {
+          this.propertyOwner = response;
+
+          // Initialize the form with fetched data
+          this.updateForm = this.fb.group({
+            name: [
+              this.propertyOwner.name,
+              [
+                Validators.required,
+                Validators.minLength(2),
+                Validators.maxLength(50),
+                Validators.pattern('^[a-zA-Z ]+$'), // Only letters and spaces
+              ],
             ],
-          ],
-          surname: [
-            this.propertyOwner.surname,
-            [
-              Validators.required,
-              Validators.minLength(2),
-              Validators.maxLength(50),
-              Validators.pattern('^[a-zA-Z ]+$'),
+            surname: [
+              this.propertyOwner.surname,
+              [
+                Validators.required,
+                Validators.minLength(2),
+                Validators.maxLength(50),
+                Validators.pattern('^[a-zA-Z ]+$'),
+              ],
             ],
-          ],
-          address: [
-            this.propertyOwner.address,
-            [Validators.required, Validators.minLength(5), Validators.maxLength(100)],
-          ],
-          phoneNumber: [this.propertyOwner.phoneNumber, [Validators.required]],
-          email: [
-            this.propertyOwner.email,
-            [Validators.required, Validators.email], // Validate email format
-          ],
-          password: [
-            '',
-            [
-              Validators.required,
-              Validators.minLength(8),
-              Validators.pattern(
-                '(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[!@#$%^&*]).*' // Password validation
-              ),
+            address: [
+              this.propertyOwner.address,
+              [
+                Validators.required,
+                Validators.minLength(5),
+                Validators.maxLength(100),
+              ],
             ],
-          ],
-          vat: [
-            this.propertyOwner.vat,
-            [
-              Validators.required,
-              Validators.minLength(9),
-              Validators.maxLength(9),
-              Validators.pattern('^[0-9]+$'), // Ensure VAT is numeric
+            phoneNumber: [
+              this.propertyOwner.phoneNumber,
+              [Validators.required],
             ],
-          ],
-        });
-      },
-      (error) => {
-        console.error('Error loading property owner details:', error);
-      }
-    );
+            email: [
+              this.propertyOwner.email,
+              [Validators.required, Validators.email], // Validate email format
+            ],
+            password: [
+              '',
+              [
+                Validators.required,
+                Validators.minLength(8),
+                Validators.pattern(
+                  '(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[!@#$%^&*]).*' // Password validation
+                ),
+              ],
+            ],
+            vat: [
+              this.propertyOwner.vat,
+              [
+                Validators.required,
+                Validators.minLength(9),
+                Validators.maxLength(9),
+                Validators.pattern('^[0-9]+$'), // Ensure VAT is numeric
+              ],
+            ],
+          });
+        },
+        (error) => {
+          console.error('Error loading property owner details:', error);
+        }
+      );
   }
 
   public onSubmit() {
@@ -114,13 +128,15 @@ export class PropertyOwnerDetailsComponent implements OnInit {
   }
 
   deletePropertyOwner() {
-    this.propertyOwnerService.deletePropertyOwnerByVat(this.propertyOwnerId).subscribe((response: any) => {
-      if (response) {
-        this.router.navigate(['/']);
-      } else {
-        // Handle failure case if needed
-        console.error('Error deleting property owner');
-      }
-    });
+    this.propertyOwnerService
+      .deletePropertyOwnerByVat(this.propertyOwnerId)
+      .subscribe((response: any) => {
+        if (response) {
+          this.router.navigate(['/']);
+        } else {
+          // Handle failure case if needed
+          console.error('Error deleting property owner');
+        }
+      });
   }
 }

@@ -1,46 +1,59 @@
 <div class="signup-card">
   <div class="card-title">
-    <h1>Create Account</h1>
+    <h1>Create Owner</h1>
   </div>
-  <form class="form-group" [formGroup]="signupForm" (ngSubmit)="onSubmit()">
+  <form
+    class="form-group-create-owner"
+    [formGroup]="createOwnerForm"
+    (ngSubmit)="onSubmitCreateOwner()"
+  >
+    <label>Name</label>
     <input type="text" name="name" placeholder="Name" formControlName="name" />
+    <label>Surname</label>
     <input
       type="text"
       name="surname"
       placeholder="Surame"
       formControlName="surname"
     />
-    <input type="text" name="vat" placeholder="Vat" formControlName="vat" />
+    <label>Owner Vat</label>
+    <input
+      type="text"
+      name="vat"
+      placeholder="Vat must contain 9 digits"
+      formControlName="vat"
+    />
+    <label>Address</label>
     <input
       type="text"
       name="address"
       placeholder="Address"
       formControlName="address"
     />
+    <label>Phone Number</label>
     <input
-      type="phoneNumber"
+      type="text"
       name="phoneNumber"
       placeholder="Phone Number"
       formControlName="phoneNumber"
     />
+    <label>Email</label>
     <input
       type="email"
       name="email"
       placeholder="Email"
       formControlName="email"
     />
+    <label>Password</label>
     <input
       type="password"
       name="password"
       placeholder="Password"
       formControlName="password"
     />
-
-    <div class="btn"><input type="submit" value="Signup" /></div>
+    <div class="btn"><input type="submit" value="Create Owner" /></div>
   </form>
 
-  <span>Already have an account? <a routerLink="/login">Sign In</a></span>
-  <!-- <div class="card-terms">
-        <input type="checkbox"> <span>I have read and agree to the <a href="">Terms of Service</a></span>
-    </div> -->
+  <span>Back to </span
+  ><a routerLink="/properties-and-property-owners">Properties</a>
 </div>

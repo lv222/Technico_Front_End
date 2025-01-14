@@ -1,50 +1,60 @@
 <div class="container">
-    
-    <div class="card-title">
-      
-        <h1>Register a repair</h1>
+  <div class="card-title">
+    <h1>Register a repair</h1>
+  </div>
+  <form
+    class="form-group-repairs"
+    [formGroup]="repairRegisterForm"
+    (ngSubmit)="onSubmit()"
+  >
+    <label>Property Id</label>
+    <input
+      type="text"
+      name="propertyItemId"
+      placeholder="Property Id"
+      formControlName="propertyItemId"
+    />
+    <label>Owner Vat</label>
+    <input type="text" name="vat" placeholder="Vat" formControlName="vat" />
+    <label>Adresss</label>
+    <input
+      type="text"
+      name="address"
+      placeholder="Address"
+      formControlName="address"
+    />
+    <label>Repair Date</label>
+    <input
+      type="datetime-local"
+      name="repairDate"
+      placeholder="DD/MM/YYYY HH:mm"
+      [min]="minDateTime"
+      formControlName="repairDate"
+    />
+    <!-- <div *ngIf="repairRegisterForm.get('repairDate')?.errors?.['required']">
+      Repair date is required.
+    </div> -->
 
-    </div>
-    <form class="form-group-repairs"[formGroup] ="repairRegisterForm" (ngSubmit)="onSubmit()">
-        <label>Property Id</label>
-        <input 
-            type="text" 
-            name="propertyItemId" 
-            placeholder="Property Id" 
-            formControlName="propertyItemId">
-        <label>Vat</label>
-        <input 
-            type="text" 
-            name="vat" 
-            placeholder="Vat" 
-            formControlName="vat">
-        <label>Adresss</label>
-        <input 
-            type="text" 
-            name="address" 
-            placeholder="Address" 
-            formControlName="address">
-        <label>Repair Date</label>
-        <input 
-            type="repairDate" 
-            name="repairDate" 
-            placeholder="Repair Date" 
-            formControlName="repairDate">
-        <label>Repair Type</label>
-        <input 
-            type="repairType" 
-            name="repairType" 
-            placeholder="Repair Type" 
-            formControlName="repairType">
-        <label>Cost</label>
-        <input 
-            type="cost" 
-            name="cost" 
-            placeholder="Cost" 
-            formControlName="cost">
-            
-       
-    </form>
-    <div class="btn"> <input type="submit" value="Create Repair"></div>
-    <span>Back to </span><a routerLink="/repairs">Repairs</a>
+    <label for="repairTypes">Choose a repair type</label>
+    <select id="repairTypes" name="repairType" formControlName="repairType">
+      <option value="Painting">Painting</option>
+      <option value="Insulation">Insulation</option>
+      <option value="Frames">Frames</option>
+      <option value="Plumbing">Plumbing</option>
+      <option value="ElectricalWork">Electrical Work</option>
+    </select>
+    <label>Description</label>
+    <input
+      type="text"
+      name="Description"
+      placeholder="Please add a repair description"
+      formControlName="description"
+    />
+
+    <label>Cost</label>
+    <input type="cost" name="cost" placeholder="Cost" formControlName="cost" />
+    <div class="btn"><input type="submit" value="Create Repair" /></div>
+  </form>
+
+  <span>Back to </span><a routerLink="/repairs">Repairs</a>
 </div>

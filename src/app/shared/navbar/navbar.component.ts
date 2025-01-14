@@ -7,15 +7,15 @@ import { NgIf } from '@angular/common';
   standalone: true,
   imports: [NgIf, RouterModule],
   templateUrl: './navbar.component.html',
-  styleUrl: './navbar.component.scss'
+  styleUrl: './navbar.component.scss',
 })
 export class NavbarComponent {
-title = 'TechnicoFront';
+  title = 'TechnicoFront';
   isTokenPresent: boolean = false;
   menuVisible = false;
 
   constructor(private router: Router) {
-    const isTokenPresent = !!localStorage.getItem('token'); 
+    const isTokenPresent = !!localStorage.getItem('token');
     this.isTokenPresent = isTokenPresent;
 
     if (!isTokenPresent) {
@@ -27,8 +27,8 @@ title = 'TechnicoFront';
     localStorage.removeItem('token');
     this.isTokenPresent = false;
     this.router.navigate(['/login']);
-}
-toggleMenu() {
-  this.menuVisible = !this.menuVisible;
-}
+  }
+  toggleMenu() {
+    this.menuVisible = !this.menuVisible;
+  }
 }

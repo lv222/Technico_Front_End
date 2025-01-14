@@ -1,30 +1,29 @@
+<!-- this is our nav -->
+<main class="nav">
+  <h1>Technico</h1>
 
-	<!-- this is our nav -->
-	<main class="nav">
-		<h1>Technico</h1>
-
-		<!-- <div class="burger-menu" (click)="toggleMenu()">
+  <!-- <div class="burger-menu" (click)="toggleMenu()">
 			<div class="burger-icon"></div>
 			<div class="burger-icon"></div>
 			<div class="burger-icon"></div>
 		  </div> -->
 
-		<div *ngIf="isTokenPresent">
-			
-				<div class="nav-links-container" [class.show]="menuVisible">
-					<div class="nav-links">
-			<a routerLink="/" class="nav-link"
-     			>Home</a>
-			<!-- <a routerLink="/property" class="nav-link">Property</a> -->
-			<!-- <a routerLink="/property-owner-details" class="nav-link">Property owner details</a> -->
-			<!-- <a routerLink="/property-owner-homepage" class="nav-link">Property owner
+  <div *ngIf="isTokenPresent">
+    <div class="nav-links-container" [class.show]="menuVisible">
+      <div class="nav-links">
+        <a routerLink="/" class="nav-link">Home</a>
+        <!-- <a routerLink="/property" class="nav-link">Property</a> -->
+        <!-- <a routerLink="/property-owner-details" class="nav-link">Property owner details</a> -->
+        <!-- <a routerLink="/property-owner-homepage" class="nav-link">Property owner
 				homepage</a> -->
-			<a routerLink="/properties-and-property-owners" class="nav-link">Properties
-				</a>
-			<!-- <a routerLink="/property-repair" class="nav-link">Property repair</a> -->
-			<a routerLink="/repairs" class="nav-link">Repairs</a>
+        <a routerLink="/properties-and-property-owners" class="nav-link"
+          >Properties
+        </a>
+        <!-- <a routerLink="/property-repair" class="nav-link">Property repair</a> -->
+        <a routerLink="/repairs" class="nav-link">Repairs</a>
 
-			<button (click)="logout()">Logout</button>
-		</div></div>
-	</div>
+        <button (click)="logout()">Logout</button>
+      </div>
+    </div>
+  </div>
 </main>

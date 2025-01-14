@@ -1,118 +1,94 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import {
+  FormBuilder,
+  FormGroup,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
 import { Router, RouterModule } from '@angular/router';
 import { AuthService } from '../../../services/auth/auth.service';
 import { RepairsService } from '../../../services/repairs.service';
 import { NgFor, NgIf } from '@angular/common';
-import { NavbarComponent } from "../../../shared/navbar/navbar.component";
+import { min } from 'rxjs';
+import { NavbarComponent } from '../../../shared/navbar/navbar.component';
 
 @Component({
   selector: 'app-create-repair',
   standalone: true,
   imports: [ReactiveFormsModule, RouterModule, NgIf, NgFor, NavbarComponent],
   templateUrl: './create-repair.component.html',
-  styleUrl: './create-repair.component.scss'
+  styleUrl: './create-repair.component.scss',
 })
 export class CreateRepairComponent implements OnInit {
-  // register: any;
-  // response: any;
-  message = '';
   repairRegisterForm!: FormGroup;
+  minDateTime: string = '';
 
-constructor(private service: RepairsService, private router: Router, private fb: FormBuilder) {}
+  constructor(
+    private fb: FormBuilder,
+    private service: RepairsService,
+    private router: Router
+  ) {}
 
-
-ngOnInit() {
-  this.repairRegisterForm = this.fb.group({
-    propertyItemId: [
-      '',
-      // [
-      //   Validators.required,
-      //   Validators.minLength(2),
-      //   Validators.maxLength(50),
-      //   Validators.pattern('^[a-zA-Z ]+$'), // Allow only letters and spaces
-      // ],
-    ],
- 
-    address: [
-      '',
-      // [
-      //   Validators.required,
-      //   Validators.minLength(5),
-      //   Validators.maxLength(100),
-      // ],
-      ],
-      repairDate: [
+  ngOnInit(): void {
+    this.setMinDateTime();
+    this.repairRegisterForm = this.fb.group({
+      propertyItemId: ['', [Validators.required]], // Add validation if needed
+      address: ['', [Validators.required, Validators.minLength(5)]], // Sample address validation
+      repairDate: ['Painting', [Validators.required]],
+      repairType: ['', [Validators.required]],
+      cost: ['', [Validators.required]],
+      vat: [
         '',
-        // [
-        //   Validators.required,
-          
-        // ],
+        [
+          Validators.required,
+          Validators.minLength(9),
+          Validators.maxLength(9),
+          Validators.pattern('^[0-9]+$'), // Ensure VAT is numeric
         ],
-        repairType: [
-      '',
-      // [
-      //   Validators.required,
-        
-      // ],
-    ],
-    cost: [
-      '',
-      [
-        Validators.required,
-       
       ],
-    ],
-    vat: [
-      '',
-      // [
-      //   Validators.required,
-      //   Validators.minLength(9),
-      //   Validators.maxLength(9),
-      //   Validators.pattern('^[0-9]+$'), // Ensure VAT is numeric
-      // ],
-    ],
-  });
-}
+    });
+  }
 
-public onSubmit() {
+  setMinDateTime(): void {
+    const now = new Date();
+    const year = now.getFullYear();
+    const month = String(now.getMonth() + 1).padStart(2, '0'); // Months are 0-indexed
+    const date = String(now.getDate()).padStart(2, '0');
+    const hours = String(now.getHours()).padStart(2, '0');
+    const minutes = String(now.getMinutes()).padStart(2, '0');
 
-  if (this.repairRegisterForm.valid) {
-    // Format repairDate to ISO string
-    const repairDateValue = this.repairRegisterForm.value.repairDate;
+    // Format as YYYY-MM-DDTHH:mm
+    this.minDateTime = `${year}-${month}-${date}T${hours}:${minutes}`;
+  }
 
-    if (repairDateValue) {
-      this.repairRegisterForm.patchValue({
-        repairDate: new Date(repairDateValue).toISOString()
+  public onSubmit(): void {
+    console.log('Is form valid?', this.repairRegisterForm.valid);
+    if (this.repairRegisterForm.valid) {
+      const repairDateValue = this.repairRegisterForm.value.repairDate;
+      if (repairDateValue) {
+        const parsedDate = new Date(repairDateValue);
+        if (!isNaN(parsedDate.getTime())) {
+          this.repairRegisterForm.patchValue({
+            repairDate: parsedDate.toISOString(),
+          });
+        } else {
+          console.error('Invalid repairDateValue:', repairDateValue);
+          alert(
+            'The repair date provided is invalid. Please use a valid date format.'
+          );
+          return;
+        }
+      }
+
+      this.service.createRepair(this.repairRegisterForm.value).subscribe({
+        next: (data: any) => {
+          console.log('Repair created:', data);
+          this.router.navigate(['/repairs']);
+        },
+        error: (err: any) => {
+          console.error('Error occurred:', err);
+        },
       });
     }
-  this.service.createRepair(this.repairRegisterForm.value)
-  .subscribe({
-    next: (data: any) => {
-      console.log(this.repairRegisterForm.value);
-      console.log('Repair created:', data);
-      
-      this.router.navigate(['/repairs']);
-    },
-    error: (err) => {
-      
-      console.error('Validation errors:', err);
-    }
-  });
-  // if (this.repairRegisterForm.valid) {
-  //   console.log(this.repairRegisterForm.value);
-    
-  //   this.service.createRepair(this.repairRegisterForm.value)
-  //     .subscribe({
-  //       next: (data: any) => {
-  //         console.log(data);
-  //         this.router.navigate(['/login']);
-  //       },
-  //       error: (err) => console.log(err)
-  //     });
-  // }
+  }
 }
-}
-
-}
-

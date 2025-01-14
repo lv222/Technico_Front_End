@@ -1,33 +1,22 @@
-import { Component, OnInit } from '@angular/core';
-import { AuthService } from '../../services/auth/auth.service';
-import { Router, RouterModule } from '@angular/router';
+import { Component } from '@angular/core';
 import {
-  FormBuilder,
-  FormControl,
   FormGroup,
-  FormsModule,
-  ReactiveFormsModule,
+  FormBuilder,
   Validators,
+  ReactiveFormsModule,
 } from '@angular/forms';
-
-// interface FormData {
-// name: string;
-// surname: string;
-// address: string;
-// email: string;
-// password: string;
-// vat: string;
-// }
+import { Router, RouterModule } from '@angular/router';
+import { AuthService } from '../../../services/auth/auth.service';
 
 @Component({
-  selector: 'app-signup',
+  selector: 'app-create-owner',
   standalone: true,
   imports: [ReactiveFormsModule, RouterModule],
-  templateUrl: './signup.component.html',
-  styleUrl: './signup.component.scss',
+  templateUrl: './create-owner.component.html',
+  styleUrl: './create-owner.component.scss',
 })
-export class SignupComponent implements OnInit {
-  public signupForm!: FormGroup;
+export class CreateOwnerComponent {
+  public createOwnerForm!: FormGroup;
 
   constructor(
     private authService: AuthService,
@@ -36,7 +25,7 @@ export class SignupComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.signupForm = this.fb.group({
+    this.createOwnerForm = this.fb.group({
       name: [
         '',
         [
@@ -93,14 +82,14 @@ export class SignupComponent implements OnInit {
     });
   }
 
-  public onSubmit() {
-    if (this.signupForm.valid) {
-      console.log(this.signupForm.value);
+  public onSubmitCreateOwner() {
+    if (this.createOwnerForm.valid) {
+      console.log(this.createOwnerForm.value);
 
-      this.authService.signup(this.signupForm.value).subscribe({
+      this.authService.signup(this.createOwnerForm.value).subscribe({
         next: (data: any) => {
           console.log(data);
-          this.router.navigate(['/login']);
+          this.router.navigate(['/properties-and-property-owners']);
         },
         error: (err) => console.log(err),
       });

@@ -1,57 +1,50 @@
-
-
-h2{
-    margin: 20px 40px 40px 20px;
-    color: #07910e;
+h2 {
+  margin: 20px 40px 40px 20px;
+  color: #07910e;
 }
 
 .container {
-    margin: 40px 10px;
-    padding: 10px;
-    max-width: 100%;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    background-color: #f9f9f9;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  }
-  
-  .group {
-    margin: 20px;
-  }
-  p {
-    margin: 8px 0;
-    font-size: 16px;
-    color: #333;
-    line-height: 1.5;
-  }
-  
- 
-  p:first-of-type {
-    font-weight: bold;
-    color: #2c3e50;
-  }
-  
- 
-  p.ng-star-inserted {
-    text-align: center;
-    font-size: 18px;
-    color: #e74c3c;
-    margin: 20px auto;
-  }
-  
-  
-  div > div {
-    margin-bottom: 15px;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    background-color: #fff;
-  }
-  
- 
+  margin: 40px 10px;
+  padding: 10px;
+  max-width: 100%;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.group {
+  margin: 0;
+}
+p {
+  margin: 8px 0;
+  font-size: 16px;
+  color: #333;
+  line-height: 1.5;
+}
+
+p:first-of-type {
+  font-weight: bold;
+  color: #2c3e50;
+}
+
+p.ng-star-inserted {
+  text-align: center;
+  font-size: 18px;
+  color: #e74c3c;
+  margin: 20px auto;
+}
+
+div > div {
+  margin-bottom: 15px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #fff;
+}
+
 //   div > div:hover {
 //     background-color: #eaf7ff;
 //     border-color: #3498db;
 //     box-shadow: 0 2px 6px rgba(52, 152, 219, 0.2);
 //   }
-  

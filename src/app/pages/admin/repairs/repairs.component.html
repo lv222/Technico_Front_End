@@ -1,99 +1,84 @@
-
 <app-navbar></app-navbar>
 
-  <div class="title-button-container">
-      <!-- <h1 class="display-4">Welcome Admin</h1>
-      <hr class="my-4"> -->
-      <div>
-        <h2 class="title"> Pending repairs</h2>
-      </div>
-    
-        
-    
-            
-     
-   
+<div class="title-button-container">
+  <div>
+    <h2 class="title">Pending repairs</h2>
+  </div>
 
-      <div class="button-container"><button 
-        routerLink="/create-repair"
-        routerLinkActive="activebutton"
-        ariaCurrentWhenActive="page">
-      Create Repair</button>
-      <button
-      routerLink="repair-search"
-     routerLinkActive="activebutton"
-     ariaCurrentWhenActive="page">Search Repair</button></div>
-      </div>
+  <div class="button-container">
+    <button
+      routerLink="/create-repair"
+      routerLinkActive="activebutton"
+      ariaCurrentWhenActive="page"
+    >
+      Create Repair
+    </button>
+    <button
+      routerLink="/search-repair"
+      routerLinkActive="activebutton"
+      ariaCurrentWhenActive="page"
+    >
+      Search Repair
+    </button>
+  </div>
+</div>
 
 <div class="container">
-  
-    <div class="row">
-      
-        <table class="table">
-          <thead>
-            <tr>
-              
-              
-              <th>Repair Id</th>
-              <th>Owner Vat</th>
-              <th>Property Id</th>
-              
-              <th>Address</th>
-              <th>Type</th>
-              <th>Description</th>
-              
-              <th>Cost</th>
-             
-              <th>Repair Date</th>
-              <th>Status</th>
-              
-              
-              <!-- <th>Owner Name</th>
+  <div class="row">
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Repair Id</th>
+          <th>Owner Vat</th>
+          <th>Property Id</th>
+
+          <th>Address</th>
+          <th>Type</th>
+          <th>Description</th>
+
+          <th>Cost</th>
+
+          <th>Repair Date</th>
+          <th>Status</th>
+
+          <!-- <th>Owner Name</th>
               
               
               <th>Property Type</th> -->
-            </tr>
-          </thead>
-          <tbody>
-            <ng-container *ngIf="propertyRepairs && propertyRepairs.length>0 ">
-              <ng-container *ngFor="let repair of propertyRepairs">
-                <tr *ngIf="repair.status === 'Pending'" >
-                  
-                  <td>{{repair.id}} </td>
+        </tr>
+      </thead>
+      <tbody>
+        <ng-container *ngIf="propertyRepairs && propertyRepairs.length > 0">
+          <ng-container *ngFor="let repair of propertyRepairs">
+            <tr *ngIf="repair.status === 'Pending'">
+              <td>{{ repair.id }}</td>
 
-                  <td>{{repair.vat}} </td>
-                  <td>{{repair.propertyItemId}} </td>
-                  
-                  
-                  
-                  <td>{{repair.address}} </td>
-                  <td>{{repair.typeOfRepair}} </td>
-                  <td>{{repair.description}} </td>
-                  
-                  <td>{{repair.cost}} </td>
-                  
-                  <td>{{ userFriendlyDate(repair.repairDate.toString())}} </td>
-                  <td>{{repair.status}} </td>
-                  
-                  
-                  <!-- <td>{{repair.propertyOwner.vatNumber}} </td>
+              <td>{{ repair.vat }}</td>
+              <td>{{ repair.propertyItemId }}</td>
+
+              <td>{{ repair.address }}</td>
+              <td>{{ repair.typeOfRepair }}</td>
+              <td>{{ repair.description }}</td>
+
+              <td>{{ repair.cost }}</td>
+
+              <td>{{ userFriendlyDate(repair.repairDate.toString()) }}</td>
+              <td>{{ repair.status }}</td>
+
+              <!-- <td>{{repair.propertyOwner.vatNumber}} </td>
                   <td>{{repair.property.propertyId}} </td>
                   <td>{{repair.property.propertyAddress}} </td>
                   <td>{{repair.property.propertyType}} </td> -->
-                  
-                </tr>
-              </ng-container>
-            </ng-container>
-            
-          </tbody>
-        </table>
-        <p *ngIf="!hasPendingRepairs()">No property repairs pending.</p>
-      </div>
-    </div>
-    
-  
+            </tr>
+          </ng-container>
+        </ng-container>
+      </tbody>
+    </table>
+    <p *ngIf="!hasPendingRepairs()">No property repairs pending.</p>
+  </div>
+</div>
 
-  <!-- vat: string,
+<!-- vat: string,
     propertyItemId: string,
     id: string,
     repairDate: string,

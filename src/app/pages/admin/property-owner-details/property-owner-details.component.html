@@ -1,29 +1,57 @@
 <app-navbar></app-navbar>
 
-<h1>Property owner details for {{propertyOwnerId}}</h1>
+<h1>Property owner details for {{ propertyOwnerId }}</h1>
 
 <div class="container">
-	<div class="row">
-		<div class="card-title">
-			<h1>Create Account</h1>
-			
-		</div>
-		<form class="form-group" [formGroup]="updateForm" (ngSubmit)="onSubmit()">
-			<input type="text" name="name" placeholder="Name" formControlName="name">
-			<input type="text" name="surname" placeholder="Surame" formControlName="surname">
-			<input type="text" name="vat" placeholder="Vat" formControlName="vat">
-			<input type="text" name="address" placeholder="Address" formControlName="address">
-			<input type="phoneNumber" name="phoneNumber" placeholder="Phone Number" formControlName="phoneNumber">
-			<input type="email" name="email" placeholder="Email" formControlName="email">
-			<input type="password" name="password" placeholder="Password" formControlName="password">
-			
-			<div class="btn"> <input type="submit" value="Update"></div>
-		   
-		</form>
-		<div class="container">
-			<input disabled type="text" [value]="propertyOwnerId" readonly>
-			<router-outlet></router-outlet>
-			<button (click)="deletePropertyOwner()">Delete Property Owner</button>
-		</div>
-	</div>
+  <div class="row">
+    <div class="card-title">
+      <h2>Update Owner Details</h2>
+    </div>
+    <form class="form-group" [formGroup]="updateForm" (ngSubmit)="onSubmit()">
+      <input
+        type="text"
+        name="name"
+        placeholder="Name"
+        formControlName="name"
+      />
+      <input
+        type="text"
+        name="surname"
+        placeholder="Surame"
+        formControlName="surname"
+      />
+      <input type="text" name="vat" placeholder="Vat" formControlName="vat" />
+      <input
+        type="text"
+        name="address"
+        placeholder="Address"
+        formControlName="address"
+      />
+      <input
+        type="phoneNumber"
+        name="phoneNumber"
+        placeholder="Phone Number"
+        formControlName="phoneNumber"
+      />
+      <input
+        type="email"
+        name="email"
+        placeholder="Email"
+        formControlName="email"
+      />
+      <input
+        type="password"
+        name="password"
+        placeholder="Password"
+        formControlName="password"
+      />
+
+      <div class="btn"><input type="submit" value="Update" /></div>
+    </form>
+    <div class="container">
+      <input disabled type="text" [value]="propertyOwnerId" readonly />
+      <router-outlet></router-outlet>
+      <button (click)="deletePropertyOwner()">Delete Property Owner</button>
+    </div>
+  </div>
 </div>
