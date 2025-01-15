@@ -7,7 +7,7 @@ export const routes: Routes = [
   {
     path: '',
     component: LoginComponent,
-    canActivate: [authGuard], // Root route with authGuard
+    // Root route with authGuard
   },
   {
     path: 'admin-home',
@@ -25,7 +25,6 @@ export const routes: Routes = [
   },
   {
     path: 'repairs',
-    canActivate: [repairNavGuard],
     loadComponent: () =>
       import('./pages/admin/repairs/repairs.component').then(
         (m) => m.RepairsComponent
@@ -83,11 +82,4 @@ export const routes: Routes = [
         './pages/admin/property-owner-details/property-owner-details.component'
       ).then((m) => m.PropertyOwnerDetailsComponent),
   },
-  // {
-  //   path: 'properties-and-property-owners/property-owner/',
-  //   loadComponent: () =>
-  //     import(
-  //       './pages/admin/property-owner-details/property-owner-details.component'
-  //     ).then((m) => m.PropertyOwnerDetailsComponent),
-  // },
 ];

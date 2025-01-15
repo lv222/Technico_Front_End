@@ -71,13 +71,14 @@
       </tr>
     </tbody>
   </table>
-
-  <ng-template #noData>
-    <p *ngIf="searchPerformed">
-      No repairs found for the given search criteria.
-    </p>
-    <p *ngIf="!searchPerformed">Use the search form to find repairs.</p>
-  </ng-template>
+  <td>
+    <ng-template #noData>
+      <p *ngIf="searchPerformed">
+        No repairs found for the given search criteria.
+      </p>
+      <p *ngIf="!searchPerformed">Use the search form to find repairs.</p>
+    </ng-template>
+  </td>
 </div>
 
 <div class="pagination" *ngIf="repairs.length > 0">

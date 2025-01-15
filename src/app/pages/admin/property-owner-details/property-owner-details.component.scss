@@ -59,8 +59,29 @@ input[name="vat"] {
   border-radius: 4px;
   font-size: 16px;
   cursor: pointer;
-  align-self: center;
+  //   align-self: center;
+  //   display: unset;
 }
+
+.btn-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+// .deactivate-button {
+//   //   border: none; /* Remove borders */
+//   background-color: rgb(241, 89, 43); /* Add a text color */
+//   padding: auto; /* Add some padding */
+//   cursor: pointer;
+// }
+
+// .delete-button {
+//   border: none; /* Remove borders */
+//   background-color: red; /* Add a text color */
+//   padding: 0; /* Add some padding */
+//   cursor: pointer;
+// }
 
 @media (max-width: 767px) {
   :host {

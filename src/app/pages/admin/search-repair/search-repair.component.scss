@@ -140,6 +140,12 @@ table tbody td,
 
 /* Responsive design */
 @media (max-width: 768px) {
+  .ng-template {
+    width: 100vw;
+  }
+
+  p {
+  }
   .table {
     font-size: 14px;
     border-collapse: collapse;
@@ -159,6 +165,10 @@ table tbody td,
     margin: 5px 0;
 
     text-align: left;
+  }
+
+  .search-container {
+    display: unset;
   }
   // table tbody th:nth-child(1){
   //   display: none;

@@ -28,7 +28,7 @@ export class NavbarComponent {
     this.isTokenPresent = false;
     this.router.navigate(['/login']);
   }
-  toggleMenu() {
-    this.menuVisible = !this.menuVisible;
-  }
+  // toggleMenu() {
+  //   this.menuVisible = !this.menuVisible;
+  // }
 }

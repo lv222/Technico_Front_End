@@ -31,10 +31,6 @@ export class PropertyOwnerDetailsComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    // const token = localStorage.getItem('token');
-    // if (!token) {
-    //   this.router.navigate(['/login']); // redirect to login if no token
-    // }
     this.route.params.subscribe((params) => {
       this.propertyOwnerId = params['id'];
       this.loadPropertyOwnerDetails(); // Ensure method is called here
@@ -123,16 +119,147 @@ export class PropertyOwnerDetailsComponent implements OnInit {
     }
   }
 
-  deletePropertyOwner() {
-    this.propertyOwnerService
-      .deletePropertyOwnerByVat(this.propertyOwnerId)
-      .subscribe((response: any) => {
-        if (response) {
-          this.router.navigate(['/repairs']);
-        } else {
-          // Handle failure case if needed
-          console.error('Error deleting property owner');
-        }
-      });
+  // Deactivate Property Owner with Confirmation
+  deactivatePropertyOwner() {
+    // Get token from localStorage
+    const token = localStorage.getItem('token');
+
+    if (!token) {
+      // If token is missing, show an error and exit the function
+      console.error('No token found, user is not authenticated');
+      alert('You must be logged in to perform this action.');
+      return;
+    }
+
+    // Ask for confirmation before deactivating
+    const confirmDeactivate = confirm(
+      'Are you sure you want to deactivate this owner?'
+    );
+
+    if (confirmDeactivate) {
+      this.propertyOwnerService
+        .deactivatePropertyOwner(this.propertyOwnerId)
+        .subscribe({
+          next: (response: any) => {
+            if (response === null || response === undefined) {
+              console.log('Property owner deleted successfully', response);
+              // this.router.navigate(['/repairs']);
+              localStorage.setItem('token', token);
+            } else {
+              console.error(
+                'Error: Empty or unsuccessful response during deletion'
+              );
+            }
+          },
+          error: (error) => {
+            if (error.status === 401) {
+              // Token expired or invalid
+              alert('Session expired. Please log in again.');
+              // this.router.navigate(['/login']);
+            } else {
+              console.error('Error deleting property owner:', error);
+              alert('An error occurred while deleting the property owner');
+            }
+          },
+          complete: () => {
+            console.log('Delete operation completed');
+          },
+        });
+    } else {
+      console.log('Deletion cancelled');
+    }
   }
+  // deactivatePropertyOwner() {
+  //   const confirmDeactivate = confirm(
+  //     'Are you sure you want to deactivate this owner?'
+  //   );
+  //   if (confirmDeactivate) {
+  //     const token = localStorage.getItem('token');
+  //     this.propertyOwnerService
+  //       .deactivatePropertyOwner(this.propertyOwnerId)
+  //       .subscribe({
+  //         next: (response: any) => {
+  //           if (response) {
+  //             // Redirect to repairs or show success message
+  //             console.log('Deactivation successful', response);
+  //             localStorage.setItem('token', token);
+  //             // this.router.navigate(['/repairs']);
+  //           } else {
+  //             // Handle failure case if needed
+  //             console.error('Error deactivating property owner');
+  //           }
+  //         },
+  //         error: (error) => {
+  //           console.error('Error deactivating property owner:', error);
+  //         },
+  //         complete: () => {
+  //           console.log('Deactivation process completed');
+  //         },
+  //       });
+  //   } else {
+  //     alert('Deletion process completed');
+  //     console.log('Deactivation cancelled');
+  //   }
+  // }
+
+  // Delete Property Owner with Confirmation
+  deletePropertyOwner() {
+    const confirmDelete = confirm(
+      'Are you sure you want to delete this owner?'
+    );
+
+    if (confirmDelete) {
+      this.propertyOwnerService
+        .deletePropertyOwner(this.propertyOwnerId)
+        .subscribe({
+          next: (response: any) => {
+            if (response) {
+              // Redirect to repairs or show success message
+              console.log('Deletion successful', response);
+              // this.router.navigate(['/repairs']);
+            } else {
+              // Handle failure case if needed
+              console.error('Error deleting property owner');
+            }
+          },
+          error: (error) => {
+            console.error('Error deleting property owner:', error);
+          },
+          complete: () => {
+            alert('Deletion process completed');
+            console.log('Deletion process completed');
+          },
+        });
+    } else {
+      console.log('Deletion cancelled');
+    }
+  }
+
+  // deactivatePropertyOwner() {
+  //   const confirmDeactivate = confirm('Are you sure you want to deactivate this owner?');
+  //   if (confirmDeactivate){}
+  //   this.propertyOwnerService
+  //     .deactivatePropertyOwner(this.propertyOwnerId)
+  //     .subscribe((response: any) => {
+  //       if (response) {
+  //         this.router.navigate(['/repairs']);
+  //       } else {
+  //         // Handle failure case if needed
+  //         console.error('Error deleting property owner');
+  //       }
+  //     });
+  // }
+
+  // deletePropertyOwner() {
+  //   this.propertyOwnerService
+  //     .deletePropertyOwner(this.propertyOwnerId)
+  //     .subscribe((response: any) => {
+  //       if (response) {
+  //         this.router.navigate(['/repairs']);
+  //       } else {
+  //         // Handle failure case if needed
+  //         console.error('Error deleting property owner');
+  //       }
+  //     });
+  // }
 }
