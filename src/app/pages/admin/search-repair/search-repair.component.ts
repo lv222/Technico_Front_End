@@ -47,7 +47,8 @@ export class SearchRepairComponent {
 
     if (!filters.vat && !filters.minDate && !filters.maxDate) {
       console.log('No filters applied');
-      this.repairs = []; // Reset the repairs list
+      this.repairs = [];
+      // Reset the repairs list
       return;
     }
 
@@ -64,6 +65,7 @@ export class SearchRepairComponent {
           this.repairs = response.elements || [];
           this.filteredRepairs = this.repairs;
           this.totalCount = response.totalCount;
+          console.log(this.repairs);
         },
         error: (error) => {
           console.error('Failed to fetch repairs:', error);
