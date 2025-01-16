@@ -60,5 +60,22 @@
       </tbody>
     </table>
   </div>
+  <div class="pagination">
+    <button
+      (click)="onPageChange(currentPage - 1)"
+      [disabled]="currentPage <= 1"
+      class="btn btn-outline-primary"
+    >
+      Previous
+    </button>
+    <span>Page {{ currentPage }}</span>
+    <button
+      (click)="onPageChange(currentPage + 1)"
+      [disabled]="currentPage * pageSize >= totalCount"
+      class="btn btn-outline-primary"
+    >
+      Next
+    </button>
+  </div>
 </div>
 <app-footer></app-footer>

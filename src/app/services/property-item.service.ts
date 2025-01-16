@@ -11,7 +11,11 @@ export class PropertyItemService {
 
   constructor(private httpClient: HttpClient) {}
 
-  getProperties(page: number, pageSize: number): Observable<PropertyItem[]> {
+  getProperties(
+    page: number,
+    pageSize: number,
+    totalCount: number
+  ): Observable<PropertyItem[]> {
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
     });

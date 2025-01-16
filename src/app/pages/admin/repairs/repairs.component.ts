@@ -25,7 +25,7 @@ export class RepairsComponent {
   propertyRepairs?: Repair[];
   totalCount: number = 0;
   currentPage: number = 1;
-  pageSize: number = 5;
+  pageSize: number = 10;
 
   constructor(private service: RepairsService, private datePipe: DatePipe) {}
 

@@ -22,7 +22,7 @@ export class PropertiesAndPropertyOwnersComponent {
   public emailSearchInput: string = '';
   public currentPage: number = 1;
   public pageSize: number = 10;
-  public totalPages: number = 1;
+  public totalCount: number = 1;
 
   constructor(
     private propertyOwnerService: PropertyOwnerService,
@@ -42,11 +42,11 @@ export class PropertiesAndPropertyOwnersComponent {
   }
   private getPropertyItems() {
     this.propertyItemService
-      .getProperties(this.currentPage, this.pageSize)
+      .getProperties(this.currentPage, this.pageSize, this.totalCount)
       .subscribe((response: any) => {
         if (response && response.elements) {
           this.propertyItems = response.elements;
-          this.totalPages = Math.ceil(response.totalCount / this.pageSize);
+          this.totalCount = Math.ceil(response.totalCount / this.pageSize);
         } else {
           this.propertyItems = [];
         }
@@ -61,17 +61,8 @@ export class PropertiesAndPropertyOwnersComponent {
       }
     });
   }
-  public nextPage() {
-    if (this.currentPage < this.totalPages) {
-      this.currentPage++;
-      this.getPropertyItems();
-    }
-  }
-
-  public previousPage() {
-    if (this.currentPage > 1) {
-      this.currentPage--;
-      this.getPropertyItems();
-    }
+  onPageChange(page: number): void {
+    this.currentPage = page;
+    this.getPropertyItems();
   }
 }
