@@ -42,7 +42,7 @@
       <tbody>
         <ng-container *ngIf="propertyRepairs && propertyRepairs.length > 0">
           <ng-container *ngFor="let repair of propertyRepairs">
-            <tr *ngIf="repair.status === 'Pending'">
+            <tr>
               <td>{{ repair.id }}</td>
 
               <td>{{ repair.vat }}</td>
@@ -63,7 +63,6 @@
         </ng-container>
       </tbody>
     </table>
-    <p *ngIf="!hasPendingRepairs()">No property repairs pending.</p>
   </div>
   <div class="pagination">
     <button

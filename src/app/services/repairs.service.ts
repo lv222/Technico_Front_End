@@ -13,6 +13,7 @@ export class RepairsService {
   currentPage: number = 1;
   pageSize: number = 10;
   filteredRepairs: Repair[] = [];
+  status = 'Pending';
 
   constructor(private httpClient: HttpClient) {}
 
@@ -30,6 +31,24 @@ export class RepairsService {
     let params = new HttpParams()
       .set('Page', currentPage.toString())
       .set('PageSize', pageSize.toString());
+
+    return this.httpClient
+      .get(`${this.URL}/Repairs`, { headers, params })
+      .pipe(map((response: any) => response));
+  }
+
+  getPendingRepairs(
+    currentPage: number,
+    pageSize: number,
+    status: string
+  ): Observable<Repair[]> {
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+    });
+    let params = new HttpParams()
+      .set('Page', currentPage.toString())
+      .set('PageSize', pageSize.toString())
+      .set('status', status);
 
     return this.httpClient
       .get(`${this.URL}/Repairs`, { headers, params })

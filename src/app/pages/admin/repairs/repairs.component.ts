@@ -26,18 +26,19 @@ export class RepairsComponent {
   totalCount: number = 0;
   currentPage: number = 1;
   pageSize: number = 10;
-
+  status = 'Pending';
   constructor(private service: RepairsService, private datePipe: DatePipe) {}
 
   ngOnInit(): void {
-    this.getRepairs();
+    this.getPendingRepairs();
   }
-  private getRepairs() {
+  private getPendingRepairs() {
     this.service
-      .getRepairs(this.currentPage, this.pageSize)
+      .getPendingRepairs(this.currentPage, this.pageSize, this.status)
       .subscribe((response: any) => {
         if (response && response.elements) {
           console.log(response);
+
           this.propertyRepairs = response.elements;
           this.totalCount = response.totalCount;
         } else {
@@ -54,21 +55,21 @@ export class RepairsComponent {
 
   onPageChange(page: number): void {
     this.currentPage = page;
-    this.getRepairs();
+    this.getPendingRepairs();
   }
 
-  public hasPendingRepairs(): boolean {
-    // do we have any repairs at all?
-    if (this.propertyRepairs === undefined) {
-      return false;
-    } else {
-      // do we have any repairs with status Pending?
-      const containsPropertyRepairWithPendingStatus =
-        this.propertyRepairs?.some((propertyRepair) => {
-          return propertyRepair.status === 'Pending';
-        });
+  // public hasPendingRepairs(): boolean {
+  //   // do we have any repairs at all?
+  //   if (this.propertyRepairs === undefined) {
+  //     return false;
+  //   } else {
+  //     // do we have any repairs with status Pending?
+  //     const containsPropertyRepairWithPendingStatus =
+  //       this.propertyRepairs?.some((propertyRepair) => {
+  //         return propertyRepair.status === 'Pending';
+  //       });
 
-      return containsPropertyRepairWithPendingStatus;
-    }
-  }
+  //     return containsPropertyRepairWithPendingStatus;
+  //   }
+  // }
 }
