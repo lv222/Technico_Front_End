@@ -37,12 +37,9 @@ export class SearchRepairComponent {
     });
   }
 
-  ngOnInit(): void {
-    // this.searchRepairs();
-  }
+  ngOnInit(): void {}
 
   searchRepairs(): void {
-    const token = localStorage.getItem('token');
     const filters = this.searchForm.value;
     this.searchPerformed = true;
 
@@ -58,7 +55,7 @@ export class SearchRepairComponent {
     };
 
     this.service
-      .searchRepairs(this.currentPage, this.pageSize, cleanFilters, token)
+      .searchRepairs(this.currentPage, this.pageSize, cleanFilters)
       .subscribe({
         next: (response: any) => {
           this.repairs = response.elements || [];

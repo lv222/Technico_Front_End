@@ -11,7 +11,33 @@
     (ngSubmit)="onSubmit()"
   >
     <label>Name</label>
-    <input type="text" name="name" placeholder="Name" formControlName="name" />
+    <input formControlName="name" type="text" name="name" placeholder="Name" />
+
+    <div
+      *ngIf="formValues.name?.errors?.['required'] && formValues.name?.touched"
+      class="error"
+    >
+      Name is required.
+    </div>
+    <div
+      *ngIf="formValues.name?.errors?.['minlength'] && formValues.name?.touched"
+      class="error"
+    >
+      Name must be at least 2 characters long.
+    </div>
+    <div
+      *ngIf="formValues.name?.errors?.['maxlength'] && formValues.name?.touched"
+      class="error"
+    >
+      Name cannot be more than 50 characters long.
+    </div>
+    <div
+      *ngIf="formValues.name?.errors?.['pattern'] && formValues.name?.touched"
+      class="error"
+    >
+      Name can only contain letters and spaces.
+    </div>
+
     <label>Surname</label>
     <input
       type="text"
@@ -19,7 +45,31 @@
       placeholder="Surame"
       formControlName="surname"
     />
-    <!-- <label>Owner Vat</label> -->
+    <div
+      *ngIf="formValues.surname?.errors?.['required'] && formValues.surname?.touched"
+      class="error"
+    >
+      Surname is required.
+    </div>
+    <div
+      *ngIf="formValues.surname?.errors?.['minlength'] && formValues.surname?.touched"
+      class="error"
+    >
+      Surname must be at least 2 characters long.
+    </div>
+    <div
+      *ngIf="formValues.surname?.errors?.['maxlength'] && formValues.surname?.touched"
+      class="error"
+    >
+      Surname cannot be more than 50 characters long.
+    </div>
+    <div
+      *ngIf="formValues.surname?.errors?.['pattern'] && formValues.surname?.touched"
+      class="error"
+    >
+      Surname can only contain letters and spaces.
+    </div>
+
     <input
       type="text"
       name="vat"
@@ -34,6 +84,26 @@
       placeholder="Address"
       formControlName="address"
     />
+
+    <div
+      *ngIf="formValues.address?.errors?.['required'] && formValues.address?.touched"
+      class="error"
+    >
+      Address is required.
+    </div>
+    <div
+      *ngIf="formValues.address?.errors?.['minlength'] && formValues.address?.touched"
+      class="error"
+    >
+      Address must be at least 2 characters long.
+    </div>
+    <div
+      *ngIf="formValues.address?.errors?.['maxlength'] && formValues.address?.touched"
+      class="error"
+    >
+      Address cannot be more than 100 characters long.
+    </div>
+
     <label>Phone Number</label>
     <input
       type="phoneNumber"
@@ -41,6 +111,14 @@
       placeholder="Phone Number"
       formControlName="phoneNumber"
     />
+
+    <div
+      *ngIf="formValues.phoneNumber?.errors?.['required'] && formValues.phoneNumber?.touched"
+      class="error"
+    >
+      Phone Number is required.
+    </div>
+
     <label>Email</label>
     <input
       type="email"
@@ -48,6 +126,19 @@
       placeholder="Email"
       formControlName="email"
     />
+
+    <div
+      *ngIf="formValues.email?.errors?.['required'] && formValues.email?.touched"
+      class="error"
+    >
+      Email is required.
+    </div>
+    <div
+      *ngIf="formValues.email?.errors?.['email'] && formValues.email?.touched"
+      class="error"
+    >
+      Please enter a valid email address.
+    </div>
     <!-- <label>Password</label>
     <input
       type="password"
@@ -58,9 +149,16 @@
 
     <div class="btn"><input type="submit" value="Update" /></div>
     <div class="btn-container">
-      <input disabled type="text" [value]="propertyOwnerId" readonly />
+      <input
+        class="disabled-button"
+        disabled
+        type="text"
+        [value]="propertyOwnerId"
+        readonly
+      />
 
       <button
+        type="button"
         class="deactivate-button"
         (click)="deactivatePropertyOwner()"
         alert="Are you sure you want to delete this owner"
@@ -69,6 +167,7 @@
       </button>
 
       <button
+        type="button"
         class="delete-button"
         (click)="deletePropertyOwner()"
         alert="Are you sure you want to delete this owner"
@@ -77,4 +176,8 @@
       </button>
     </div>
   </form>
+  <div class="route-link">
+    <span>Back to </span
+    ><a routerLink="/properties-and-property-owners">Properties</a>
+  </div>
 </div>

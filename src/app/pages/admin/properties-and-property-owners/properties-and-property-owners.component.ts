@@ -3,7 +3,7 @@ import { PropertyOwner } from '../../../model/property-owner';
 import { PropertyOwnerService } from '../../../services/property-owner.service';
 import { NavbarComponent } from '../../../shared/navbar/navbar.component';
 import { RouterModule } from '@angular/router';
-import { NgFor, NgIf } from '@angular/common';
+import { NgFor } from '@angular/common';
 import { PropertyItemService } from '../../../services/property-item.service';
 import { PropertyItem } from '../../../model/property-item';
 
@@ -19,6 +19,9 @@ export class PropertiesAndPropertyOwnersComponent {
   public propertyItems: PropertyItem[] = [];
   public vatSearchInput: string = '';
   public emailSearchInput: string = '';
+  public currentPage: number = 1;
+  public pageSize: number = 10;
+  public totalPages: number = 1;
 
   constructor(
     private propertyOwnerService: PropertyOwnerService,
@@ -37,13 +40,16 @@ export class PropertiesAndPropertyOwnersComponent {
     this.propertyItems = [];
   }
   private getPropertyItems() {
-    this.propertyItemService.getProperties().subscribe((response: any) => {
-      if (response && response.elements) {
-        this.propertyItems = response.elements;
-      } else {
-        this.propertyItems = [];
-      }
-    });
+    this.propertyItemService
+      .getProperties(this.currentPage, this.pageSize)
+      .subscribe((response: any) => {
+        if (response && response.elements) {
+          this.propertyItems = response.elements;
+          this.totalPages = Math.ceil(response.totalCount / this.pageSize);
+        } else {
+          this.propertyItems = [];
+        }
+      });
   }
   private getPropertyOwners() {
     this.propertyOwnerService.getUsers().subscribe((response: any) => {
@@ -53,5 +59,18 @@ export class PropertiesAndPropertyOwnersComponent {
         this.propertyOwners = [];
       }
     });
+  }
+  public nextPage() {
+    if (this.currentPage < this.totalPages) {
+      this.currentPage++;
+      this.getPropertyItems();
+    }
+  }
+
+  public previousPage() {
+    if (this.currentPage > 1) {
+      this.currentPage--;
+      this.getPropertyItems();
+    }
   }
 }

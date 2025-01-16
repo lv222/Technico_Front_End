@@ -6,16 +6,16 @@ import {
   Validators,
 } from '@angular/forms';
 import { Router, RouterModule } from '@angular/router';
-import { AuthService } from '../../../services/auth/auth.service';
+
 import { RepairsService } from '../../../services/repairs.service';
 import { NgFor, NgIf } from '@angular/common';
-import { min } from 'rxjs';
+
 import { NavbarComponent } from '../../../shared/navbar/navbar.component';
 
 @Component({
   selector: 'app-create-repair',
   standalone: true,
-  imports: [ReactiveFormsModule, RouterModule, NgIf, NgFor, NavbarComponent],
+  imports: [ReactiveFormsModule, RouterModule, NgIf],
   templateUrl: './create-repair.component.html',
   styleUrl: './create-repair.component.scss',
 })
@@ -33,10 +33,10 @@ export class CreateRepairComponent implements OnInit {
     this.repairRegisterForm = this.fb.group({
       propertyItemId: ['', [Validators.required]], // Add validation if needed
       address: ['', [Validators.required, Validators.minLength(5)]], // Sample address validation
-      repairDate: ['Painting', [Validators.required]],
-      repairType: ['', [Validators.required]],
+      repairDate: ['', [Validators.required]],
+      repairType: ['Painting', [Validators.required]],
       description: ['', Validators.required],
-      cost: ['', [Validators.required]],
+      cost: ['', [Validators.required]], // Cost cannot be negative
       vat: [
         '',
         [
@@ -47,6 +47,17 @@ export class CreateRepairComponent implements OnInit {
         ],
       ],
     });
+  }
+  get formValues() {
+    return {
+      propertyItemId: this.repairRegisterForm.get('propertyItemId'),
+      repairDate: this.repairRegisterForm.get('repairDate'),
+      vat: this.repairRegisterForm.get('vat'),
+      repairType: this.repairRegisterForm.get('repairType'),
+      address: this.repairRegisterForm.get('address'),
+      description: this.repairRegisterForm.get('description'),
+      cost: this.repairRegisterForm.get('cost'),
+    };
   }
 
   setMinDateTime(): void {

@@ -59,38 +59,6 @@ export class PropertyOwnerSearchComponent {
       });
   }
 
-  // filters the PropertyOwners based on search field values. This expects the
-  // Property
-  public onFrontendSearch(): void {
-    // if both search fields are empty we should not search
-    if (this.vatSearchInput === '' && this.emailSearchInput === '') {
-      return;
-    }
-    // we initiate an empty array to place the filtering results
-    let filteredPropertyOwners: PropertyOwner[] = [];
-
-    // we loop through each element in this.allPropertyOwners and perform
-    // the function propertyOwner => {} to each element.
-    //
-    // that is the array containing all property owners, but they are never
-    // displayed directly from that.
-    //
-    // In this function we check the search condition and if true, we push
-    // the element to filteredPropertyOwners.
-    this.allPropertyOwners.forEach((propertyOwner) => {
-      // if one of the search conditions is true, this element should be
-      // displayed
-      if (
-        propertyOwner.vat.includes(this.emailSearchInput) ||
-        propertyOwner.vat.includes(this.emailSearchInput)
-      ) {
-        filteredPropertyOwners.push(propertyOwner);
-      }
-    });
-
-    this.propertyOwners = filteredPropertyOwners;
-  }
-
   public resetSearchResult(): void {
     this.vatSearchInput = '';
     this.emailSearchInput = '';

@@ -11,18 +11,17 @@ export class PropertyItemService {
 
   constructor(private httpClient: HttpClient) {}
 
-  getProperties(): Observable<PropertyItem[]> {
-    const token = localStorage.getItem('token');
-    if (!token) {
-      throw new Error('No token found');
-    }
+  getProperties(page: number, pageSize: number): Observable<PropertyItem[]> {
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
-      Authorization: `Bearer ${token}`,
     });
+    const params = {
+      page: page.toString(),
+      pageSize: pageSize.toString(),
+    };
 
     return this.httpClient
-      .get(`${this.URL}/PropertyItems`, { headers })
+      .get(`${this.URL}/PropertyItems`, { headers, params })
       .pipe(map((response: any) => response));
   }
 }

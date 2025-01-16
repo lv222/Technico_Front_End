@@ -113,6 +113,13 @@ table tbody td:nth-child(9) {
   text-align: center;
   margin-top: 20px;
 }
+.pagination button {
+  margin: 10px 0;
+}
+.pagination span {
+  padding: 0;
+  margin: 20px 12px;
+}
 
 /* Responsive design */
 @media (max-width: 767px) {

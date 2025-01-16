@@ -32,9 +32,6 @@
           <!-- <th>email</th> -->
           <th>Construction Year</th>
           <th>Property Type</th>
-          <!-- 
-					<th>surname</th>
-					 -->
           <th>Owner Details</th>
         </tr>
       </thead>
@@ -43,12 +40,9 @@
           <tr>
             <td>{{ propertyItem.vat }}</td>
             <td>{{ propertyItem.address }}</td>
-            <!-- <td>{{propertyOwner.email}} </td> -->
+
             <td>{{ propertyItem.constructionYear }}</td>
             <td>{{ propertyItem.propertyType }}</td>
-            <!--
-						<td>{{propertyOwner.surname}} </td>
-						<td>{{propertyOwner.userType}} </td> -->
 
             <td>
               <a
@@ -66,4 +60,13 @@
       </tbody>
     </table>
   </div>
+  <!-- <div class="pagination">
+    <button (click)="previousPage()" [disabled]="currentPage === 1">
+      Previous
+    </button>
+    <span>Page {{ currentPage }}</span>
+    <button (click)="nextPage()" [disabled]="currentPage === totalPages">
+      Next
+    </button>
+  </div> -->
 </div>

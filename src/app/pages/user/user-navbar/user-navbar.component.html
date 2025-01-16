@@ -1,0 +1,17 @@
+<main class="nav">
+  <h1>Technico</h1>
+
+  <div *ngIf="isTokenPresent">
+    <div class="nav-links-container">
+      <div class="nav-links">
+        <a routerLink="/user-home" class="nav-link">Home</a>
+
+        <a routerLink="/user-property" class="nav-link">Properties </a>
+
+        <a routerLink="/user-repair" class="nav-link">Repairs</a>
+
+        <button (click)="logout()">Logout</button>
+      </div>
+    </div>
+  </div>
+</main>

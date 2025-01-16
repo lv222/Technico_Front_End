@@ -11,14 +11,11 @@ body {
 }
 
 h2 {
-  // margin: auto;
   color: #07910e;
 }
 
 .container {
   border-radius: 8px;
-  // background-color: #f9f9f9;
-  // box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   margin: 40px 10px;
   padding: 10px;
   max-width: 100%;
@@ -56,17 +53,13 @@ button {
 }
 
 table {
-  // // display: flex;
-  // // flex: row;
   width: 100%;
   border-collapse: collapse;
-  // margin: 20px 0;
+
   font-size: 16px;
   text-align: left;
-  // border-bottom: 1px sol;
 }
 
-// //   /* Table header styling */
 table thead th {
   background-color: #f4f4f4;
   color: #333;
@@ -76,15 +69,12 @@ table thead th {
   border-collapse: collapse;
 }
 
-//   /* Table body row styling */
 table tbody tr {
   border-bottom: 1px solid #ddd;
-  // font-weight: bold;
   color: #333;
   border-collapse: collapse;
 }
 
-//   /* Table cell styling */
 table tbody td,
 .table tbody th {
   padding: 12px 0;
@@ -92,18 +82,23 @@ table tbody td,
   border-collapse: collapse;
 }
 
-//   /* Highlight for pending status */
 table tbody td:nth-child(9) {
   font-weight: bold;
-  color: #e67e22; /* Orange color for pending status */
+  color: #e67e22;
 }
 
-/* Styling for 'No property repairs pending' message */
 .no-repairs-message {
   font-size: 18px;
   color: #777;
   text-align: center;
   margin-top: 20px;
+}
+.pagination button {
+  margin: 20px 0;
+}
+.pagination span {
+  padding: 0;
+  margin: 10px 10px 0 10px;
 }
 
 /* Responsive design */
@@ -120,11 +115,10 @@ table tbody td:nth-child(9) {
     text-align: left;
   }
   .table thead {
-    display: none; /* Hide header for mobile */
+    display: none;
   }
 
   .table tbody td {
-    // width: 100%;
     display: flex;
     padding: 4px;
     flex-direction: column;
@@ -134,25 +128,7 @@ table tbody td:nth-child(9) {
 
     text-align: left;
   }
-  // table tbody th:nth-child(1){
-  //   display: none;
-  // }
 
-  // .table tbody td {
-  //   display: block;
-  //   text-align: right;
-  //   position: relative;
-  //   padding-left: 50%;
-  // }
-  // .table tbody td:before {
-  //   content: attr(data-label);
-  //   position: absolute;
-  //   left: 0;
-  //   width: 45%;
-  //   padding-left: 15px;
-  //   font-weight: bold;
-  //   text-align: left;
-  // }
   .no-repairs-message {
     font-size: 16px;
   }

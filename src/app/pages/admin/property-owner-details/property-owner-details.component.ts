@@ -1,20 +1,21 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, NgModule } from '@angular/core';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { PropertyOwnerService } from '../../../services/property-owner.service';
 import {
   FormBuilder,
+  FormControl,
   FormGroup,
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { PropertyOwner } from '../../../model/property-owner';
-import { NavbarComponent } from '../../../shared/navbar/navbar.component';
+
 import { updateOwner } from '../../../model/update-owner';
+import { NgIf, CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-property-owner-details',
   standalone: true,
-  imports: [ReactiveFormsModule, RouterModule],
+  imports: [ReactiveFormsModule, RouterModule, NgIf],
   templateUrl: './property-owner-details.component.html',
   styleUrl: './property-owner-details.component.scss',
 })
@@ -24,16 +25,17 @@ export class PropertyOwnerDetailsComponent implements OnInit {
   updateForm!: FormGroup;
 
   constructor(
+    private fb: FormBuilder,
     private route: ActivatedRoute,
     private propertyOwnerService: PropertyOwnerService,
-    private router: Router,
-    private fb: FormBuilder
+    private router: Router
   ) {}
 
   ngOnInit(): void {
     this.route.params.subscribe((params) => {
       this.propertyOwnerId = params['id'];
-      this.loadPropertyOwnerDetails(); // Ensure method is called here
+      // Ensure method is called here
+      this.loadPropertyOwnerDetails();
     });
   }
 
@@ -81,7 +83,7 @@ export class PropertyOwnerDetailsComponent implements OnInit {
               this.propertyOwner.email,
               [Validators.required, Validators.email], // Validate email format
             ],
-            // password: ['12aW$ffff', [Validators.required]],
+
             vat: [
               this.propertyOwner.vat,
               [
@@ -95,7 +97,6 @@ export class PropertyOwnerDetailsComponent implements OnInit {
         },
         error: (err) => {
           console.error('Error loading property owner details:', err);
-          // Handle the error gracefully, e.g., show a message to the user
         },
         complete: () => {
           console.log('Property owner details loaded successfully.');
@@ -112,26 +113,24 @@ export class PropertyOwnerDetailsComponent implements OnInit {
       this.propertyOwnerService.updateUsers(vat, propertyOwner).subscribe({
         next: (data: any) => {
           console.log(data);
-          this.router.navigate(['/login']); // Redirect after success
+          this.router.navigate(['/properties-and-property-owners']); // Redirect after success
         },
         error: (err: any) => console.log(err),
       });
     }
   }
+  get formValues() {
+    return {
+      name: this.updateForm.get('name'),
+      surname: this.updateForm.get('surname'),
+      phoneNumber: this.updateForm.get('phoneNumber'),
+      address: this.updateForm.get('address'),
+      email: this.updateForm.get('email'),
+    };
+  }
 
   // Deactivate Property Owner with Confirmation
   deactivatePropertyOwner() {
-    // Get token from localStorage
-    const token = localStorage.getItem('token');
-
-    if (!token) {
-      // If token is missing, show an error and exit the function
-      console.error('No token found, user is not authenticated');
-      alert('You must be logged in to perform this action.');
-      return;
-    }
-
-    // Ask for confirmation before deactivating
     const confirmDeactivate = confirm(
       'Are you sure you want to deactivate this owner?'
     );
@@ -143,24 +142,14 @@ export class PropertyOwnerDetailsComponent implements OnInit {
           next: (response: any) => {
             if (response === null || response === undefined) {
               console.log('Property owner deleted successfully', response);
-              // this.router.navigate(['/repairs']);
-              localStorage.setItem('token', token);
+              this.router.navigate(['/properties-and-property-owners']);
             } else {
               console.error(
                 'Error: Empty or unsuccessful response during deletion'
               );
             }
           },
-          error: (error) => {
-            if (error.status === 401) {
-              // Token expired or invalid
-              alert('Session expired. Please log in again.');
-              // this.router.navigate(['/login']);
-            } else {
-              console.error('Error deleting property owner:', error);
-              alert('An error occurred while deleting the property owner');
-            }
-          },
+
           complete: () => {
             console.log('Delete operation completed');
           },
@@ -169,38 +158,6 @@ export class PropertyOwnerDetailsComponent implements OnInit {
       console.log('Deletion cancelled');
     }
   }
-  // deactivatePropertyOwner() {
-  //   const confirmDeactivate = confirm(
-  //     'Are you sure you want to deactivate this owner?'
-  //   );
-  //   if (confirmDeactivate) {
-  //     const token = localStorage.getItem('token');
-  //     this.propertyOwnerService
-  //       .deactivatePropertyOwner(this.propertyOwnerId)
-  //       .subscribe({
-  //         next: (response: any) => {
-  //           if (response) {
-  //             // Redirect to repairs or show success message
-  //             console.log('Deactivation successful', response);
-  //             localStorage.setItem('token', token);
-  //             // this.router.navigate(['/repairs']);
-  //           } else {
-  //             // Handle failure case if needed
-  //             console.error('Error deactivating property owner');
-  //           }
-  //         },
-  //         error: (error) => {
-  //           console.error('Error deactivating property owner:', error);
-  //         },
-  //         complete: () => {
-  //           console.log('Deactivation process completed');
-  //         },
-  //       });
-  //   } else {
-  //     alert('Deletion process completed');
-  //     console.log('Deactivation cancelled');
-  //   }
-  // }
 
   // Delete Property Owner with Confirmation
   deletePropertyOwner() {
@@ -214,16 +171,11 @@ export class PropertyOwnerDetailsComponent implements OnInit {
         .subscribe({
           next: (response: any) => {
             if (response) {
-              // Redirect to repairs or show success message
               console.log('Deletion successful', response);
-              // this.router.navigate(['/repairs']);
+              this.router.navigate(['/properties-and-property-owners']);
             } else {
-              // Handle failure case if needed
               console.error('Error deleting property owner');
             }
-          },
-          error: (error) => {
-            console.error('Error deleting property owner:', error);
           },
           complete: () => {
             alert('Deletion process completed');
@@ -234,32 +186,4 @@ export class PropertyOwnerDetailsComponent implements OnInit {
       console.log('Deletion cancelled');
     }
   }
-
-  // deactivatePropertyOwner() {
-  //   const confirmDeactivate = confirm('Are you sure you want to deactivate this owner?');
-  //   if (confirmDeactivate){}
-  //   this.propertyOwnerService
-  //     .deactivatePropertyOwner(this.propertyOwnerId)
-  //     .subscribe((response: any) => {
-  //       if (response) {
-  //         this.router.navigate(['/repairs']);
-  //       } else {
-  //         // Handle failure case if needed
-  //         console.error('Error deleting property owner');
-  //       }
-  //     });
-  // }
-
-  // deletePropertyOwner() {
-  //   this.propertyOwnerService
-  //     .deletePropertyOwner(this.propertyOwnerId)
-  //     .subscribe((response: any) => {
-  //       if (response) {
-  //         this.router.navigate(['/repairs']);
-  //       } else {
-  //         // Handle failure case if needed
-  //         console.error('Error deleting property owner');
-  //       }
-  //     });
-  // }
 }

@@ -10,15 +10,6 @@ import {
   Validators,
 } from '@angular/forms';
 
-// interface FormData {
-// name: string;
-// surname: string;
-// address: string;
-// email: string;
-// password: string;
-// vat: string;
-// }
-
 @Component({
   selector: 'app-signup',
   standalone: true,

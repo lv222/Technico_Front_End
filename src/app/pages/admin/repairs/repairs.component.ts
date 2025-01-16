@@ -15,29 +15,38 @@ import { DatePipe } from '@angular/common';
 })
 export class RepairsComponent {
   propertyRepairs?: Repair[];
+  totalCount: number = 0;
+  currentPage: number = 1;
+  pageSize: number = 5;
+
   constructor(private service: RepairsService, private datePipe: DatePipe) {}
 
   ngOnInit(): void {
     this.getRepairs();
   }
   private getRepairs() {
-    this.service.getRepairs().subscribe((response: any) => {
-      if (response && response.elements) {
-        console.log(response);
-        this.propertyRepairs = response.elements;
-      } else {
-        this.propertyRepairs = [];
-      }
+    this.service
+      .getRepairs(this.currentPage, this.pageSize)
+      .subscribe((response: any) => {
+        if (response && response.elements) {
+          console.log(response);
+          this.propertyRepairs = response.elements;
+          this.totalCount = response.totalCount;
+        } else {
+          this.propertyRepairs = [];
+        }
 
-      console.log(this.propertyRepairs);
-      // this.propertyRepairs?.forEach(repair => {
-      //   const slicedDate = repair.repairDate.toISOString().slice(0, 10);
-      //   console.log(repair.repairDate);
-      // })
-    });
+        console.log(this.propertyRepairs);
+      });
   }
+
   userFriendlyDate(date: string | null | undefined) {
     return this.datePipe.transform(date, 'medium') || 'Invalid Date';
+  }
+
+  onPageChange(page: number): void {
+    this.currentPage = page;
+    this.getRepairs();
   }
 
   public hasPendingRepairs(): boolean {

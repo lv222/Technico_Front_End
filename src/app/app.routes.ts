@@ -6,8 +6,8 @@ import { repairNavGuard } from './guards/repair-nav.guard';
 export const routes: Routes = [
   {
     path: '',
-    component: LoginComponent,
-    // Root route with authGuard
+    redirectTo: '/login',
+    pathMatch: 'full',
   },
   {
     path: 'admin-home',
@@ -19,7 +19,7 @@ export const routes: Routes = [
   {
     path: 'user-home',
     loadComponent: () =>
-      import('./pages/user-home/user-home.component').then(
+      import('./pages/user/user-home/user-home.component').then(
         (m) => m.UserHomeComponent
       ),
   },

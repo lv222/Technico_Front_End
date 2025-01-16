@@ -3,10 +3,6 @@ import { NavbarComponent } from '../../../shared/navbar/navbar.component';
 import { RepairsService } from '../../../services/repairs.service';
 import { NgFor, NgIf, DatePipe } from '@angular/common';
 import { Repair } from '../../../model/repair';
-import { PropertyOwnerService } from '../../../services/property-owner.service';
-import { PropertyOwner } from '../../../model/property-owner';
-import { PropertyItemService } from '../../../services/property-item.service';
-import { PropertyItem } from '../../../model/property-item';
 
 @Component({
   selector: 'app-admin-home',
@@ -21,7 +17,6 @@ export class AdminHomeComponent implements OnInit {
   currentPage = 1;
   pageSize = 10;
   totalCount = 0;
-  token: string | null = localStorage.getItem('token');
 
   constructor(private service: RepairsService, private datePipe: DatePipe) {}
 
@@ -32,7 +27,7 @@ export class AdminHomeComponent implements OnInit {
   searchTodayRepairs(): void {
     const filters = {}; // You can extend this with other filters like VAT if needed
     this.service
-      .searchTodayRepairs(this.currentPage, this.pageSize, filters, this.token)
+      .searchTodayRepairs(this.currentPage, this.pageSize, filters)
       .subscribe({
         next: (response: any) => {
           this.propertyRepair = response.elements; // Store the repairs
@@ -50,7 +45,7 @@ export class AdminHomeComponent implements OnInit {
   }
   // searchTodayRepairs() {
   //   const filters = {};
-  //   this.service.searchTodayRepairs(this.currentPage, this.pageSize, filters, this.token).subscribe((response: any) => {
+  //   this.service.searchTodayRepairs(this.currentPage, this.pageSize, filters).subscribe((response: any) => {
   //     if (response && response.elements) {
   //       // Get today's date in the format YYYY-MM-DD
   //       // const today = new Date();

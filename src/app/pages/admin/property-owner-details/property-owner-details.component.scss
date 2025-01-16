@@ -44,14 +44,17 @@
   border: 1px solid #ccc;
   border-radius: 4px;
   font-size: 14px;
-  margin: 10px 0;
+  margin: 10px 10px;
 }
 input[name="vat"] {
   display: none;
 }
+.disabled-button {
+  padding: 20px;
+}
 
 .btn input {
-  margin: 20px 0 25px 0;
+  margin: 10px 10px;
   padding: 10px 25px;
   background-color: #07910e;
   color: white;
@@ -59,8 +62,6 @@ input[name="vat"] {
   border-radius: 4px;
   font-size: 16px;
   cursor: pointer;
-  //   align-self: center;
-  //   display: unset;
 }
 
 .btn-container {
@@ -68,34 +69,28 @@ input[name="vat"] {
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
+  margin-right: 10px;
 }
-// .deactivate-button {
-//   //   border: none; /* Remove borders */
-//   background-color: rgb(241, 89, 43); /* Add a text color */
-//   padding: auto; /* Add some padding */
-//   cursor: pointer;
-// }
 
-// .delete-button {
-//   border: none; /* Remove borders */
-//   background-color: red; /* Add a text color */
-//   padding: 0; /* Add some padding */
-//   cursor: pointer;
-// }
+.route-link {
+  margin-top: 10px;
+}
+
+.error {
+  color: red;
+  font-size: 0.875em;
+  margin: 0 0px 10px 12px;
+}
 
 @media (max-width: 767px) {
   :host {
     justify-content: flex-start;
   }
   .container {
-    // display: flex;
-    // flex-direction: column;
     width: 100%;
-    // height: 100%;
     padding: 0;
     padding-bottom: 180px;
     margin: 0;
-    // overflow: hidden;
   }
 
   .card-title h1 {
@@ -107,15 +102,3 @@ input[name="vat"] {
     padding: 10px;
   }
 }
-
-// .card-terms {
-//     display: flex;
-//     align-items: center;
-//     padding: 10px;
-
-// }
-
-// .card-terms span {
-//     margin: 5px;
-//     font-size: 13px;
-// }

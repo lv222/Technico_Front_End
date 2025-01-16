@@ -10,7 +10,7 @@
               type="text"
               [(ngModel)]="vatSearchInput"
               name="vatSearchQuery"
-              placeholder="Enter VAT to search"
+              placeholder="VAT must be 9 numbers"
               class="form-control"
             />
           </div>
@@ -20,7 +20,7 @@
               type="text"
               [(ngModel)]="emailSearchInput"
               name="emailSearchQuery"
-              placeholder="Enter email to search"
+              placeholder="example@email.com"
               class="form-control"
             />
           </div>
@@ -62,7 +62,9 @@
       </ng-container>
     </tbody>
   </table>
-  <!-- <p *ngIf="searchPerformed && (!propertyOwners || propertyOwners.length === 0)">
-            No property owners found.
-        </p> -->
+  <p
+    *ngIf="searchPerformed && (!propertyOwners || propertyOwners.length === 0)"
+  >
+    No property owners found.
+  </p>
 </div>

@@ -7,11 +7,12 @@ import {
 } from '@angular/forms';
 import { Router, RouterModule } from '@angular/router';
 import { AuthService } from '../../../services/auth/auth.service';
+import { NgIf, CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-create-owner',
   standalone: true,
-  imports: [ReactiveFormsModule, RouterModule],
+  imports: [ReactiveFormsModule, RouterModule, NgIf],
   templateUrl: './create-owner.component.html',
   styleUrl: './create-owner.component.scss',
 })
@@ -61,7 +62,7 @@ export class CreateOwnerComponent {
         ],
       ],
       password: [
-        '',
+        'Aa123!123!',
         [
           Validators.required,
           Validators.minLength(8),
@@ -80,6 +81,9 @@ export class CreateOwnerComponent {
         ],
       ],
     });
+    this.onFormControlValueChanges('name'); // Capitalize 'name'
+    this.onFormControlValueChanges('surname'); // Capitalize 'surname'
+    this.onFormControlValueChanges('address'); // Capitalize 'address'
   }
 
   public onSubmitCreateOwner() {
@@ -94,5 +98,34 @@ export class CreateOwnerComponent {
         error: (err) => console.log(err),
       });
     }
+  }
+  get formValues() {
+    return {
+      name: this.createOwnerForm.get('name'),
+      surname: this.createOwnerForm.get('surname'),
+      vat: this.createOwnerForm.get('vat'),
+      phoneNumber: this.createOwnerForm.get('phoneNumber'),
+      address: this.createOwnerForm.get('address'),
+      email: this.createOwnerForm.get('email'),
+    };
+  }
+  private onFormControlValueChanges(controlName: string): void {
+    const control = this.createOwnerForm.get(controlName);
+
+    control?.valueChanges.subscribe((value) => {
+      // Apply capitalization function
+      const capitalizedValue = this.capitalize(value);
+      // Update the form control value with the capitalized string
+      control.setValue(capitalizedValue, { emitEvent: false }); // Don't emit event again
+    });
+  }
+
+  // Capitalize function
+  private capitalize(value: string): string {
+    if (!value) return value; // Handle null or undefined
+    return value
+      .split(' ')
+      .map((word) => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase()) // Capitalize each word
+      .join(' ');
   }
 }

@@ -31,20 +31,12 @@
           <th>Repair Id</th>
           <th>Owner Vat</th>
           <th>Property Id</th>
-
           <th>Address</th>
           <th>Type</th>
           <th>Description</th>
-
           <th>Cost</th>
-
           <th>Repair Date</th>
           <th>Status</th>
-
-          <!-- <th>Owner Name</th>
-              
-              
-              <th>Property Type</th> -->
         </tr>
       </thead>
       <tbody>
@@ -63,12 +55,9 @@
               <td>{{ repair.cost }}</td>
 
               <td>{{ userFriendlyDate(repair.repairDate.toString()) }}</td>
-              <td>{{ repair.status }}</td>
-
-              <!-- <td>{{repair.propertyOwner.vatNumber}} </td>
-                  <td>{{repair.property.propertyId}} </td>
-                  <td>{{repair.property.propertyAddress}} </td>
-                  <td>{{repair.property.propertyType}} </td> -->
+              <td>
+                {{ repair.status }}
+              </td>
             </tr>
           </ng-container>
         </ng-container>
@@ -76,15 +65,21 @@
     </table>
     <p *ngIf="!hasPendingRepairs()">No property repairs pending.</p>
   </div>
+  <div class="pagination">
+    <button
+      (click)="onPageChange(currentPage - 1)"
+      [disabled]="currentPage <= 1"
+      class="btn btn-outline-primary"
+    >
+      Previous
+    </button>
+    <span>Page {{ currentPage }}</span>
+    <button
+      (click)="onPageChange(currentPage + 1)"
+      [disabled]="currentPage * pageSize >= totalCount"
+      class="btn btn-outline-primary"
+    >
+      Next
+    </button>
+  </div>
 </div>
-
-<!-- vat: string,
-    propertyItemId: string,
-    id: string,
-    repairDate: string,
-    // typeOfRepair: Painting,
-    description: string,
-    address: string,
-    status: string,
-    // status: Pending,
-    cost: number; -->

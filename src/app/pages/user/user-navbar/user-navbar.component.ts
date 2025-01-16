@@ -1,15 +1,15 @@
-import { Component } from '@angular/core';
-import { Router, RouterModule } from '@angular/router';
 import { NgIf } from '@angular/common';
+import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-navbar',
+  selector: 'app-user-navbar',
   standalone: true,
-  imports: [NgIf, RouterModule],
-  templateUrl: './navbar.component.html',
-  styleUrl: './navbar.component.scss',
+  imports: [NgIf],
+  templateUrl: './user-navbar.component.html',
+  styleUrl: './user-navbar.component.scss',
 })
-export class NavbarComponent {
+export class UserNavbarComponent {
   title = 'TechnicoFront';
   isTokenPresent: boolean = false;
   menuVisible = false;

@@ -7,24 +7,100 @@
     [formGroup]="createOwnerForm"
     (ngSubmit)="onSubmitCreateOwner()"
     autocomplete="off"
-    autocapitalize="on"
   >
     <label>Name</label>
-    <input type="text" name="name" placeholder="Name" formControlName="name" />
+    <input
+      type="text"
+      name="name"
+      placeholder="Name"
+      formControlName="name"
+      autocapitalize="on"
+    />
+    <div
+      *ngIf="formValues.name?.errors?.['required'] && formValues.name?.touched"
+      class="error"
+    >
+      Name is required.
+    </div>
+    <div
+      *ngIf="formValues.name?.errors?.['minlength'] && formValues.name?.touched"
+      class="error"
+    >
+      Name must be at least 2 characters long.
+    </div>
+    <div
+      *ngIf="formValues.name?.errors?.['maxlength'] && formValues.name?.touched"
+      class="error"
+    >
+      Name cannot be more than 50 characters long.
+    </div>
+    <div
+      *ngIf="formValues.name?.errors?.['pattern'] && formValues.name?.touched"
+      class="error"
+    >
+      Name can only contain letters and spaces.
+    </div>
     <label>Surname</label>
     <input
       type="text"
       name="surname"
+      autocapitalize="on"
       placeholder="Surame"
       formControlName="surname"
     />
+    <div
+      *ngIf="formValues.surname?.errors?.['required'] && formValues.surname?.touched"
+      class="error"
+    >
+      Surname is required.
+    </div>
+    <div
+      *ngIf="formValues.surname?.errors?.['minlength'] && formValues.surname?.touched"
+      class="error"
+    >
+      Surname must be at least 2 characters long.
+    </div>
+    <div
+      *ngIf="formValues.surname?.errors?.['maxlength'] && formValues.surname?.touched"
+      class="error"
+    >
+      Surname cannot be more than 50 characters long.
+    </div>
+    <div
+      *ngIf="formValues.surname?.errors?.['pattern'] && formValues.surname?.touched"
+      class="error"
+    >
+      Surname can only contain letters and spaces.
+    </div>
     <label>Owner Vat</label>
     <input
       type="text"
       name="vat"
-      placeholder="Vat must contain 9 digits"
+      placeholder="Vat must contain 9 numbers."
       formControlName="vat"
     />
+    <div
+      *ngIf="formValues.vat?.errors?.['required'] && formValues.vat?.touched"
+      class="error"
+    >
+      Owner Vat is required.
+    </div>
+    <div
+      *ngIf="formValues.vat?.errors?.['minlength'] && formValues.vat?.touched"
+      class="error"
+    >
+      Owner Vat must be at least 9 characters long.
+    </div>
+    <div
+      *ngIf="formValues.vat?.errors?.['maxlength'] && formValues.vat?.touched"
+      class="error"
+    ></div>
+    <div
+      *ngIf="formValues.vat?.errors?.['pattern'] && formValues.vat?.touched"
+      class="error"
+    >
+      Owner Vat must be contain only numbers.
+    </div>
     <label>Address</label>
     <input
       type="text"
@@ -32,6 +108,24 @@
       placeholder="Address"
       formControlName="address"
     />
+    <div
+      *ngIf="formValues.address?.errors?.['required'] && formValues.address?.touched"
+      class="error"
+    >
+      Address is required.
+    </div>
+    <div
+      *ngIf="formValues.surname?.errors?.['minlength'] && formValues.surname?.touched"
+      class="error"
+    >
+      Address must be at least 2 characters long.
+    </div>
+    <div
+      *ngIf="formValues.address?.errors?.['maxlength'] && formValues.address?.touched"
+      class="error"
+    >
+      Address cannot be more than 100 characters long.
+    </div>
     <label>Phone Number</label>
     <input
       type="text"
@@ -39,6 +133,12 @@
       placeholder="Phone Number"
       formControlName="phoneNumber"
     />
+    <div
+      *ngIf="formValues.phoneNumber?.errors?.['required'] && formValues.phoneNumber?.touched"
+      class="error"
+    >
+      Phone Number is required.
+    </div>
     <label>Email</label>
     <input
       type="email"
@@ -46,7 +146,19 @@
       placeholder="Email"
       formControlName="email"
     />
-    <label>Password</label>
+    <div
+      *ngIf="formValues.email?.errors?.['required'] && formValues.email?.touched"
+      class="error"
+    >
+      Email is required.
+    </div>
+    <div
+      *ngIf="formValues.email?.errors?.['email'] && formValues.email?.touched"
+      class="error"
+    >
+      Please enter a valid email address.
+    </div>
+    <!-- <label>Password</label> -->
     <input
       type="password"
       name="password"

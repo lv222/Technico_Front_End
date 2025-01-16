@@ -17,42 +17,32 @@ export class RepairsService {
   constructor(private httpClient: HttpClient) {}
 
   createRepair(data: any) {
-    const token = localStorage.getItem('token');
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
-      Authorization: `Bearer ${token}`,
     });
     return this.httpClient.post(`${this.URL}/Repairs`, data, { headers });
   }
 
-  getRepairs(): Observable<Repair[]> {
-    const token = localStorage.getItem('token');
-    if (!token) {
-      throw new Error('No token found');
-    }
+  getRepairs(currentPage: number, pageSize: number): Observable<Repair[]> {
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
-      Authorization: `Bearer ${token}`,
     });
+    let params = new HttpParams()
+      .set('Page', currentPage.toString())
+      .set('PageSize', pageSize.toString());
 
     return this.httpClient
-      .get(`${this.URL}/Repairs`, { headers })
+      .get(`${this.URL}/Repairs`, { headers, params })
       .pipe(map((response: any) => response));
   }
 
   searchRepairs(
     currentPage: number,
     pageSize: number,
-    filters: any,
-    token: string | null
+    filters: any
   ): Observable<any> {
-    if (!token) {
-      throw new Error('No token found');
-    }
-
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
-      Authorization: `Bearer ${token}`,
     });
 
     let params = new HttpParams()
@@ -75,16 +65,10 @@ export class RepairsService {
   searchTodayRepairs(
     currentPage: number,
     pageSize: number,
-    filters: any,
-    token: string | null
+    filters: any
   ): Observable<any> {
-    if (!token) {
-      throw new Error('No token found');
-    }
-
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
-      Authorization: `Bearer ${token}`,
     });
 
     let params = new HttpParams()

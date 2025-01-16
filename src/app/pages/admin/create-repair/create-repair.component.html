@@ -15,8 +15,41 @@
       placeholder="Property Id"
       formControlName="propertyItemId"
     />
+    <div
+      *ngIf="formValues.propertyItemId?.errors?.['required'] && formValues.propertyItemId?.touched"
+      class="error"
+    >
+      Property Id is required.
+    </div>
     <label>Owner Vat</label>
-    <input type="text" name="vat" placeholder="Vat" formControlName="vat" />
+    <input
+      type="text"
+      name="vat"
+      placeholder="Vat must contain 9 numbers."
+      formControlName="vat"
+    />
+    <div
+      *ngIf="formValues.vat?.errors?.['required'] && formValues.vat?.touched"
+      class="error"
+    >
+      Owner Vat is required.
+    </div>
+    <div
+      *ngIf="formValues.vat?.errors?.['minlength'] && formValues.vat?.touched"
+      class="error"
+    >
+      Owner Vat must be at least 9 characters long.
+    </div>
+    <div
+      *ngIf="formValues.vat?.errors?.['maxlength'] && formValues.vat?.touched"
+      class="error"
+    ></div>
+    <div
+      *ngIf="formValues.vat?.errors?.['pattern'] && formValues.vat?.touched"
+      class="error"
+    >
+      Owner Vat must be contain only numbers.
+    </div>
     <label>Adresss</label>
     <input
       type="text"
@@ -24,6 +57,12 @@
       placeholder="Address"
       formControlName="address"
     />
+    <div
+      *ngIf="formValues.address?.errors?.['required'] && formValues.address?.touched"
+      class="error"
+    >
+      Address is required.
+    </div>
     <label>Repair Date</label>
     <input
       type="datetime-local"
@@ -32,9 +71,12 @@
       [min]="minDateTime"
       formControlName="repairDate"
     />
-    <!-- <div *ngIf="repairRegisterForm.get('repairDate')?.errors?.['required']">
-      Repair date is required.
-    </div> -->
+    <div
+      *ngIf="formValues.repairDate?.errors?.['required'] && formValues.repairDate?.touched"
+      class="error"
+    >
+      Repair Date is required.
+    </div>
 
     <label for="repairTypes">Choose a repair type</label>
     <select id="repairTypes" name="repairType" formControlName="repairType">
@@ -51,9 +93,32 @@
       placeholder="Please add a repair description"
       formControlName="description"
     />
+    <div
+      *ngIf="formValues.description?.errors?.['required'] && formValues.description?.touched"
+      class="error"
+    >
+      Description is required.
+    </div>
 
     <label>Cost</label>
-    <input type="cost" name="cost" placeholder="Cost" formControlName="cost" />
+    <input
+      type="number"
+      name="cost"
+      placeholder="Cost"
+      formControlName="cost"
+    />
+    <div
+      *ngIf="formValues.cost?.errors?.['required'] && formValues.cost?.touched"
+      class="error"
+    >
+      Cost is required.
+    </div>
+    <div
+      *ngIf="formValues.cost?.errors?.['pattern'] && formValues.cost?.touched"
+      class="error"
+    >
+      Cost cannot be negative.
+    </div>
     <div class="btn"><input type="submit" value="Create Repair" /></div>
   </form>
 
