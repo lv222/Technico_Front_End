@@ -4,14 +4,23 @@
 
 <div class="container" *ngIf="propertyRepair && propertyRepair.length > 0">
   <div class="group" *ngFor="let repair of propertyRepair">
-    <p>Owner Vat: {{ repair.vat }}</p>
-    <p>Repair Id: {{ repair.id }}</p>
-    <p>Repair Date: {{ userFriendlyDate(repair.repairDate.toString()) }}</p>
-    <p>Repair Type: {{ repair.typeOfRepair }}</p>
-    <p>Repair Description: {{ repair.description }}</p>
+    <ng-container
+      class="group"
+      *ngIf="repair.status === 'Pending' || repair.status === 'InProgress'"
+    >
+      <p><span>Owner Vat: </span>{{ repair.vat }}</p>
+      <p><span>Id:</span> {{ repair.id }}</p>
+      <p>
+        <span>Repair Date:</span>
+        {{ userFriendlyDate(repair.repairDate.toString()) }}
+      </p>
+      <p><span>Repair Type:</span> {{ repair.typeOfRepair }}</p>
+      <p><span>Repair Description:</span> {{ repair.description }}</p>
+      <p><span>Repair Status:</span> {{ repair.status }}</p>
+      <p *ngIf="!propertyRepair || propertyRepair.length === 0">
+        No repairs for today.
+      </p>
+    </ng-container>
   </div>
-  <p *ngIf="!propertyRepair || propertyRepair.length === 0">
-    No repairs for today.
-  </p>
 </div>
 <app-footer></app-footer>

@@ -6,7 +6,7 @@ export interface Repair {
   typeOfRepair: string;
   description: string;
   address: string;
-  status: 'Pending' | 'Complete' | 'InProgress';
+  status: string;
 
   cost: number;
 }
