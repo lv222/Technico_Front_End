@@ -6,11 +6,12 @@ import { RouterModule } from '@angular/router';
 import { NgFor } from '@angular/common';
 import { PropertyItemService } from '../../../services/property-item.service';
 import { PropertyItem } from '../../../model/property-item';
+import { FooterComponent } from '../../../shared/footer/footer.component';
 
 @Component({
   selector: 'app-properties-and-properties-owners',
   standalone: true,
-  imports: [NavbarComponent, RouterModule, NgFor],
+  imports: [NavbarComponent, RouterModule, NgFor, FooterComponent],
   templateUrl: './properties-and-property-owners.component.html',
   styleUrl: './properties-and-properties-owners.component.scss',
 })

@@ -6,11 +6,12 @@ import { DatePipe, NgFor, NgIf } from '@angular/common';
 import { RepairsService } from '../../../services/repairs.service';
 import { Repair } from '../../../model/repair';
 import { NavbarComponent } from '../../../shared/navbar/navbar.component';
+import { FooterComponent } from '../../../shared/footer/footer.component';
 
 @Component({
   selector: 'app-search-repair',
   standalone: true,
-  imports: [ReactiveFormsModule, NgFor, NgIf, NavbarComponent],
+  imports: [ReactiveFormsModule, NgFor, NgIf, NavbarComponent, FooterComponent],
   templateUrl: './search-repair.component.html',
   styleUrl: './search-repair.component.scss',
 })
@@ -30,6 +31,7 @@ export class SearchRepairComponent {
     private datePipe: DatePipe
   ) {
     this.searchForm = this.fb.group({
+      vat: [''],
       minDate: [''],
       maxDate: [''],
       page: [1],
@@ -43,13 +45,14 @@ export class SearchRepairComponent {
     const filters = this.searchForm.value;
     this.searchPerformed = true;
 
-    if (!filters.minDate && !filters.maxDate) {
+    if (!filters.vat && !filters.minDate && !filters.maxDate) {
       console.log('No filters applied');
       this.repairs = []; // Reset the repairs list
       return;
     }
 
     const cleanFilters = {
+      vat: filters.vat || null,
       minDate: filters.minDate || null,
       maxDate: filters.maxDate || null,
     };

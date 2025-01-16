@@ -8,11 +8,12 @@ import { FormsModule, NgModel } from '@angular/forms';
 import { NgFor, NgIf } from '@angular/common';
 import { NavbarComponent } from '../../../shared/navbar/navbar.component';
 import { ActivatedRoute, Router } from '@angular/router';
+import { FooterComponent } from '../../../shared/footer/footer.component';
 
 @Component({
   selector: 'app-property-owner-search',
   standalone: true,
-  imports: [FormsModule, NgFor, NavbarComponent, NgIf],
+  imports: [FormsModule, NgFor, NavbarComponent, NgIf, FooterComponent],
   templateUrl: './property-owner-search.component.html',
   styleUrl: './property-owner-search.component.scss',
 })

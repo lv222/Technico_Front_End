@@ -3,11 +3,12 @@ import { NavbarComponent } from '../../../shared/navbar/navbar.component';
 import { RepairsService } from '../../../services/repairs.service';
 import { NgFor, NgIf, DatePipe } from '@angular/common';
 import { Repair } from '../../../model/repair';
+import { FooterComponent } from '../../../shared/footer/footer.component';
 
 @Component({
   selector: 'app-admin-home',
   standalone: true,
-  imports: [NavbarComponent, NgIf, NgFor],
+  imports: [NavbarComponent, NgIf, NgFor, FooterComponent],
   templateUrl: './admin-home.component.html',
   styleUrl: './admin-home.component.scss',
 })

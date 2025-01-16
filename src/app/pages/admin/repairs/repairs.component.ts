@@ -5,11 +5,19 @@ import { RepairsService } from '../../../services/repairs.service';
 import { Repair } from '../../../model/repair';
 import { NavbarComponent } from '../../../shared/navbar/navbar.component';
 import { DatePipe } from '@angular/common';
+import { FooterComponent } from '../../../shared/footer/footer.component';
 
 @Component({
   selector: 'app-repairs',
   standalone: true,
-  imports: [RouterModule, NgIf, NgFor, NavbarComponent, CommonModule],
+  imports: [
+    RouterModule,
+    NgIf,
+    NgFor,
+    NavbarComponent,
+    CommonModule,
+    FooterComponent,
+  ],
   templateUrl: './repairs.component.html',
   styleUrl: './repairs.component.scss',
 })

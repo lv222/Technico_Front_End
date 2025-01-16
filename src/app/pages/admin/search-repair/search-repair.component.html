@@ -11,6 +11,15 @@
       >
         <div class="search-container">
           <div class="search-input">
+            <!-- <label for="vat">VAT (User ID):</label> -->
+            <input
+              type="text"
+              id="vat"
+              formControlName="vat"
+              placeholder="Search based on Owner Vat"
+            />
+          </div>
+          <div class="search-input">
             <input
               type="date"
               formControlName="minDate"
@@ -98,3 +107,4 @@
     Next
   </button>
 </div>
+<app-footer></app-footer>
